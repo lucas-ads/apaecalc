@@ -1,0 +1,375 @@
+/*############################ 0 - Configurações gerais da página ############################*/
+@charset "UTF-8";
+
+[class*="icon-"]:before {
+    font-family: 'entypo', sans-serif;
+}
+
+body{
+    font-size: 10px;
+    margin: 0;
+}
+
+body *{
+    font-family: Arial Black;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+.foco{
+    border: solid 4px black;
+    background-color: rgb(230,230,230);
+}
+
+.foco:disabled{
+    border: solid 4px gray;
+}
+
+/*############################ 1 - Cabecalho da página ############################*/
+header#cabecalho{
+    overflow: hidden;
+    text-align: center;
+    background-color: rgb(225,239,187);
+    margin: 0px;
+}
+
+header#cabecalho > img{
+    display: inline-block;
+    width: 11%;
+    margin: 5px;
+    overflow: hidden;
+}
+
+header#cabecalho > img#logoApae{
+    float: left;
+    margin-left: 1em;
+}
+
+header#cabecalho > img#logoIfms{
+    float: right;
+    margin-right: 1em;
+}
+
+header#cabecalho h1{
+    display: inline-block;
+    max-width: 60%;
+    font-size: 1.5em;
+}
+
+/*############################ 2 - Corpo da pagina ############################*/
+main{
+    display: block;
+    padding: 0px;
+    text-align: center;
+    margin-top: 2em;
+}
+
+/*######################### 2.1 - Estilização do Menu de Modos de Jogo #######################################*/
+div#home{
+    overflow: hidden;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: block;
+    width: 90%;
+    text-align: left;
+}
+
+div#home h1{
+    text-align: center;
+}
+
+div#home div#arcade{
+    margin-top: 2em;
+    text-align: center;
+}
+
+div#home #arcade #formModoLivre{
+    display: inline-block;
+    text-align: left
+}
+
+div#home > div button{
+    display: block;
+    margin: 0.8em auto;
+    font-size: 1.5em;
+}
+
+div#home div#arcade #formModoLivre *{
+    font-size: 1.3em;
+}
+
+div#home div#arcade input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+    margin-top: 1em;
+}
+
+div#home div#carreira h2{
+    margin-left: 5%;
+    font-size: 1.6em;
+}
+
+div#home > div{
+    overflow: hidden;
+}
+
+div#home #formLogout{
+    display: block;
+    width: 100%;
+    margin-top: 1em;
+    text-align: center;
+}
+
+div#home button.icon-logout{
+    font-size: 6em;
+    width: 1.6em;
+    cursor: pointer;
+    padding-left: 0.2em;
+}
+
+/*######################### 2.2 - Estilização do Jogo #######################################*/
+
+#game{
+    /*text-align: center;*/
+    display: none;
+}
+
+#game > h1#titlefase{
+    margin: 0 auto;
+    font-size: 2em;
+    display: inline-block;
+}
+
+#game #btResetar{
+    font-size: 2em;
+    padding: 0;
+    width: 1.8em;
+    cursor: pointer;
+    float: right;
+    margin-right: 1em;
+}
+
+#game div#container{
+    margin: 1em auto;
+    width: 95%;
+}
+
+#game div#container > div{
+    display: inline-block;
+}
+
+#game div.side{
+    margin: 0;
+    display: block;
+    text-align: right;
+    box-sizing: border-box;
+}
+
+#game div.right{
+    vertical-align: top;
+}
+
+/*############################ 2.2.1 - Estilização das linhas ############################*/
+
+#game div#container .line{
+    margin: 0.5em 0.25em;
+    box-sizing: border-box;
+}
+
+#game div#container .line *{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+#game .line input[type*='number']{
+    width: 70px;
+    text-align: center;
+}
+
+#game .line #correcao:before{
+    display: inline-block;
+    font-size: 1.2em;
+}
+
+#game .line #correcao{
+    vertical-align: bottom;
+}
+
+#game .icon-check{
+    color: green;
+}
+
+#game .icon-cancel{
+    color: red;
+}
+/*############################ 2.2.2 - Estilização dos botões inferiores ############################*/
+
+#game #voltarMenu{
+    font-size: 2em;
+    float: left;
+    margin-left: 8%;
+    width: 17%;
+    cursor: pointer;
+}
+
+#game #continue, #game #nextstage{
+    font-size: 2em;
+    cursor: pointer;
+}
+
+/*########################### 3 - Estilização da mensagem de confirmação ############################*/
+
+#confirmacao{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.7);
+    text-align: center;
+    display: none;
+}
+
+#confirmacao > div{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1.5em;
+    min-width: 200px;
+}
+
+#confirmacao h1{
+    margin: 0 auto 0.5em auto;
+    white-space: nowrap;
+}
+
+#confirmacao button{
+    float: left;
+}
+
+#confirmacao button:last-child{
+    float: right;
+}
+
+#confirmacao button{
+    margin: 0 5%;
+    font-size: 1.8em;
+}
+
+@media only screen and (min-width: 475px){
+    body{
+        font-size: 15px;
+    }
+
+    div#arcade input[type="checkbox"]{
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media only screen and (min-width: 635px){
+    body{
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-width: 890px){
+    header#cabecalho h1{
+        font-size: 2em;
+    }
+
+    body{
+        font-size: 15px;
+    }
+
+    main{
+        overflow: hidden;
+    }
+
+    div#home #formModoLivre *{
+        font-size: 1.25em;
+    }
+
+    div#home div#carreira h2{
+        font-size: 1.45em;
+    }
+
+    div#home div#carreira h2{
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    div#home div#carreira, div#home div#arcade{
+        display: inline-block;
+        width: 45%;
+        float: left;
+    }
+
+    div#home div#arcade{
+        margin-top: 0em;
+        margin-left: 5%;
+        float: right;
+    }
+
+    #game div.side{
+        display: inline-block;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #game #container > div{
+        width: 100%;
+        padding: 0;
+    }
+
+    #game div.right{
+        margin-left: 6%;
+    }
+
+    #game #voltarMenu{
+        width: 15%;
+    }
+
+    #game > h1#titlefase{
+        margin-left: 2.8em;
+        font-size: 3em;
+    }
+
+    #game button#btResetar{
+        font-size: 3em;
+    }
+
+    #game #continue, #game #nextstage{
+        margin-right: 23%;
+    }
+}
+
+@media only screen and (min-width: 1020px){
+    #game div#container .line *{
+        font-size: 1.8em;
+    }
+
+    #container .line input[type*='number']{
+        width: 100px;
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 1275px){
+    body{
+        font-size: 19px;
+    }
+
+    div#home div#carreira h2{
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        font-size: 1.65em;
+    }
+
+    header#cabecalho h1{
+        margin: 0.4em auto;
+    }
+}

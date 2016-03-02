@@ -1,0 +1,56 @@
+body{
+    font-size: 10px;
+    background-color: rgb(225,239,187);
+}
+
+body *{
+    font-family: sans-serif;
+    font-weight: bold;
+    font-family: Arial Black;
+    text-transform: uppercase;
+}
+
+main#principal{
+    text-align: center;
+    display: block;
+}
+
+form#formlogin{
+    border: solid 2px black;
+    background-color: rgb(220,220,220);
+    display: inline-block;
+    padding: 20px;
+}
+
+form#formlogin > h1{
+    margin-top: 0;
+}
+
+form#formlogin div.campo{
+    text-align: left;
+}
+
+form#formlogin input{
+    width: 100%;
+    display: block;
+    padding-left: 0.5em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+form#formlogin div.campo *, form#formlogin button{
+    font-size: 1.8em;
+}
+
+form#formlogin input[type*="text"]{
+    text-transform: none;
+}
+
+form#formlogin button, form#formlogin div.campo{
+    margin-top: 15px;
+}
+
+::-webkit-input-placeholder{
+    color: rgba(200,40,40,0.8);
+}
