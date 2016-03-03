@@ -1,3 +1,5 @@
+//############### Código para Cadastrar Estudante ############
+
 function exibirFormEstudante(titulo, textobt1, textobt2,funcao1,funcao2){
     var formEstudante=$('#cadastroEstudante');
     formEstudante.find('input').val('');
@@ -109,8 +111,33 @@ $('#btn-cadastrarEstudante').click(function(){
   exibirFormEstudante('Cadastrar Estudante','Fechar','Cadastrar',null,cadastrarEstudante);
 });
 
+//############### Código para Cadastrar Turma ############
+
+function exibirFormTurma(titulo, textobt1, textobt2,funcao1,funcao2){
+    var formTurma=$('#cadastroTurma');
+    formTurma.find('input').val('');
+    formTurma.find('textarea').val('');
+    formTurma.find('output').val('');
+    formTurma.find('button').off();
+    formTurma.find('h1').html(titulo);
+    formTurma.find('#btTurma1').text(textobt1);
+    formTurma.find('#btTurma1').click(function(){
+        if(typeof(funcao1)=='function'){
+            funcao1();
+        }
+        formTurma.css('display','none');
+    });
+    formTurma.find('#btTurma2').text(textobt2);
+    formTurma.find('#btTurma2').click(function(){
+        if(typeof(funcao2)=='function'){
+            funcao2();
+        }
+    });
+    formTurma.css('display','inline-block');
+}
+
 $('#btn-cadastrarTurma').click(function(){
-  exibirFormEstudante('Cadastrar Estudante','Fechar','Cadastrar',null,cadastrarEstudante);
+  exibirFormTurma('Cadastrar Turma','Fechar','Cadastrar',null,null);
 });
 
 $(document).ready(function(){

@@ -90,27 +90,27 @@ main{
     white-space: nowrap;
 }
 
-#cadastroEstudante #formCadEstudante > div{
+div[id*="formCad"] > div{
   text-align: right;
   margin: 1em auto;
 }
 
-#cadastroEstudante #formCadEstudante label{
+div[id*="formCad"] label{
   font-size: 1em;
 }
 
-#cadastroEstudante #formCadEstudante input, textarea,select{
+div[id*="formCad"] input, textarea,select{
   width: 50%;
   font-size: 1.1em;
 }
 
-#cadastroEstudante textarea{
+.form textarea{
   resize: none;
   resize: vertical;
-  max-height: 60px;
+  max-height: 100px;
 }
 
-#cadastroEstudante #div-observacao label{
+.form .div-observacao label{
   vertical-align: super;
 }
 
@@ -118,7 +118,7 @@ main{
   text-transform: none;
 }
 
-#cadastroEstudante button{
+.form button{
     float: left;
     display: inline-block;
     font-size: 1.4em;
@@ -126,12 +126,12 @@ main{
     margin-left: 1em;
 }
 
-#cadastroEstudante button:last-child{
+.form button:last-child{
     float: right;
     margin-right: 1em;
 }
 
-#cadastroEstudante output{
+.form output{
   display: block;
   color: red;
   min-height: 1.3em;

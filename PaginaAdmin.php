@@ -32,7 +32,7 @@
         <button type="submit">Sair</button>
     </form>
     <button id="btn-cadastrarEstudante">Cadastrar Estudante</button>
-    <!--<button id="btn-cadastrarTurma">Cadastrar Turma</button>-->
+    <button id="btn-cadastrarTurma">Cadastrar Turma</button>
   </main>
   <div id="testes">
 
@@ -59,7 +59,7 @@
 
               </select>
             </div>
-            <div id="div-observacao">
+            <div class="div-observacao">
               <label for="observacao">Observação:</label>
               <textarea id="observacao" rows="1" cols="40"></textarea>
             </div>
@@ -88,38 +88,16 @@
         <h1>Cadastrar Turma</h1>
         <div id="formCadTurma">
           <div class="">
-            <label for="nome">*Nome:</label>
-            <input type="text" id="nome" placeholder="Ex. João da Silva" required>
+            <label for="nometurma">*Turma:</label>
+            <input type="text" id="nometurma" placeholder="Ex. 3º ANO - B" required>
           </div>
-          <div class="">
-            <label for="nomeusuario">*Nome de Usuário:</label>
-            <input type="text" id="nomeusuario" placeholder="Ex. joao-silva" required>
-          </div>
-          <div class="">
-            <label for="dataNascimento">*Data de Nascimento:</label>
-            <input type="text" id="dataNascimento" placeholder="Ex. 10/05/2005" required>
-          </div>
-          <div id="div-observacao">
-            <label for="observacao">Observação:</label>
-            <textarea id="observacao" rows="1" cols="40"></textarea>
-          </div>
-          <div class="">
-            <label for="">*Selecione a Turma:</label>
-            <select id="select-turmas">
-
-            </select>
-          </div>
-          <div class="">
-            <label for="password">*Senha:</label>
-            <input type="password" id="password" placeholder="Mínimo: 6 caracteres" required>
-          </div>
-          <div class="">
-            <label for="confirm-password">*Confirme a senha:</label>
-            <input type="password" id="confirm-password" placeholder="Repita a senha" required>
+          <div class="div-observacao">
+            <label for="observacaoturma">Observação:</label>
+            <textarea id="observacaoturma" rows="1" cols="40"></textarea>
           </div>
           <output> </output>
-          <button id="bt1">Cancelar</button>
-          <button id="bt2">Cadastrar</button>
+          <button id="btTurma1">Cancelar</button>
+          <button id="btTurma2">Cadastrar</button>
         </div>
     </div>
   </div>
