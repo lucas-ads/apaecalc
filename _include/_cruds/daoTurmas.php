@@ -22,4 +22,12 @@
     desconectar($conexao);
     return $resultset['count(*)'];
   }
+
+  function insereTurma($nome,$observacao){
+    $conexao=conectar();
+    $stmt=$conexao->prepare("insert into turma (nome_turma,observacao) values(?,?);");
+    $stmt->bind_param("ss",$nome,$observacao);
+    $stmt->execute();
+    desconectar($conexao);
+  }
 ?>
