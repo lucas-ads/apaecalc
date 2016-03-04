@@ -1,78 +1,27 @@
-//############### Código para Cadastrar Estudante ############
-
-function exibirFormEstudante(titulo, textobt1, textobt2,funcao1,funcao2){
-    var formEstudante=$('#cadastroEstudante');
-    formEstudante.find('input').val('');
-    formEstudante.find('textarea').val('');
-    formEstudante.find('output').val('');
-    formEstudante.find('button').off();
-    formEstudante.find('h1').html(titulo);
-    formEstudante.find('#bt1').text(textobt1);
-    formEstudante.find('#bt1').click(function(){
+//Função para exibir formularios
+function exibirForm(form, titulo, textobt1, textobt2,funcao1,funcao2){
+    form.find('input').val('');
+    form.find('textarea').val('');
+    form.find('output').val('');
+    form.find('button').off();
+    form.find('h1').html(titulo);
+    form.find('#bt1').text(textobt1);
+    form.find('#bt1').click(function(){
         if(typeof(funcao1)=='function'){
             funcao1();
         }
-        formEstudante.css('display','none');
+        form.css('display','none');
     });
-    formEstudante.find('#bt2').text(textobt2);
-    formEstudante.find('#bt2').click(function(){
+    form.find('#bt2').text(textobt2);
+    form.find('#bt2').click(function(){
         if(typeof(funcao2)=='function'){
             funcao2();
         }
     });
-    formEstudante.css('display','inline-block');
-    carregarTurmasDeficiencias();
+    form.css('display','inline-block');
 }
 
-function cadastrarEstudante(){
-  var nomeusuario=$('#nomeusuario').val();
-  var nome=$('#nome').val();
-  var dataNascimento=$('#dataNascimento').val();
-  var observacao=$('#observacao').val();
-  var turma = $('#select-turmas').val();
-  var deficiencia = $('#select-deficiencia').val();
-  var senha= $('#password').val();
-  var confirmasenha= $('#confirm-password').val();
-
-  var output=$('#cadastroEstudante output');
-  if(nomeusuario!=""&&nome!=""&&dataNascimento!=""&&senha!=""&&confirmasenha!=""){
-    output.text('');
-    $.ajax({
-        url: '_include/CadastrarEstudante.php',
-        dataType: 'json',
-        type: 'POST',
-        data: {nome:nome,nomeusuario:nomeusuario,dataNascimento:dataNascimento,observacao:observacao,turma:turma,deficiencia:deficiencia,senha:senha,confirmasenha:confirmasenha},
-        tentativas: 0,
-        success: function(data){
-            //$('#testes').append('<br>success: '+this.tentativas);
-            //$('#testes').append(data);
-            output.text(data[1]);
-            if(data[0]==1){
-              output.css('color','green');
-            }else{
-              output.css('color','red');
-              if(data[0]=="turma"||data[0]=="deficiencia"){
-                carregarTurmasDeficiencias();
-              }else{
-                $('#'+data[0]).select();
-              }
-            }
-        },
-        error: function(data){
-//          $('#testes').append('<br>error: '+this.tentativas);
-          this.tentativas+=1;
-          if(this.tentativas<3){
-            $.ajax(this);
-          }else{
-  //          $('#testes').append('<br>Conexão interrompida');
-          }
-        }
-    });
-  }else{
-    output.text("Preencha todos os campos marcados com (*)");
-  }
-}
-
+//Função para carregar e exibir Turmas e Deficiências
 function carregarTurmasDeficiencias(){
   $('#select-turmas').html('');
   $('#select-deficiencia').html('');
@@ -107,37 +56,77 @@ function carregarTurmasDeficiencias(){
   });
 }
 
-$('#btn-cadastrarEstudante').click(function(){
-  exibirFormEstudante('Cadastrar Estudante','Fechar','Cadastrar',null,cadastrarEstudante);
-});
-
-//############### Código para Cadastrar Turma ############
-
-function exibirFormTurma(titulo, textobt1, textobt2,funcao1,funcao2){
-    var formTurma=$('#cadastroTurma');
-    formTurma.find('input').val('');
-    formTurma.find('textarea').val('');
-    formTurma.find('output').val('');
-    formTurma.find('button').off();
-    formTurma.find('h1').html(titulo);
-    formTurma.find('#btTurma1').text(textobt1);
-    formTurma.find('#btTurma1').click(function(){
-        if(typeof(funcao1)=='function'){
-            funcao1();
+//Função para, ao receber os dados, o elemento de saída e o endereço do arquivo php, cadastra-los e tratar os seus retornos
+function cadastrarItem(dados,output,url){
+    output.text('');
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        type: 'POST',
+        data: dados,
+        tentativas: 0,
+        success: function(data){
+            //$('#testes').append('<br>success: '+this.tentativas);
+            //$('#testes').append(data);
+            output.text(data[1]);
+            if(data[0]==1){
+              output.css('color','green');
+            }else{
+              output.css('color','red');
+              if(data[0]=="turma"||data[0]=="deficiencia"){
+                carregarTurmasDeficiencias();
+              }else{
+                $('#'+data[0]).select();
+              }
+            }
+        },
+        error: function(data){
+//          $('#testes').append('<br>error: '+this.tentativas);
+          this.tentativas+=1;
+          if(this.tentativas<3){
+            $.ajax(this);
+          }else{
+  //          $('#testes').append('<br>Conexão interrompida');
+          }
         }
-        formTurma.css('display','none');
     });
-    formTurma.find('#btTurma2').text(textobt2);
-    formTurma.find('#btTurma2').click(function(){
-        if(typeof(funcao2)=='function'){
-            funcao2();
-        }
-    });
-    formTurma.css('display','inline-block');
 }
 
+$('#btn-cadastrarEstudante').click(function(){
+  carregarTurmasDeficiencias();
+  exibirForm($('#cadastroEstudante'),'Cadastrar Estudante','Fechar','Cadastrar',null,function(){
+    var output=$('#cadastroEstudante output');
+    var dados={
+      nomeusuario:$('#nomeusuario').val(),
+      nome:$('#nome').val(),
+      dataNascimento:$('#dataNascimento').val(),
+      observacao:$('#observacao').val(),
+      turma: $('#select-turmas').val(),
+      deficiencia: $('#select-deficiencia').val(),
+      senha: $('#password').val(),
+      confirmasenha: $('#confirm-password').val()
+    };
+    if(dados.nomeusuario!=""&&dados.nome!=""&&dados.dataNascimento!=""&&dados.senha!=""&&dados.confirmasenha!=""){
+      cadastrarItem(dados,output,'_include/CadastrarEstudante.php');
+    }else{
+      output.text("Preencha todos os campos marcados com (*)");
+    }
+  });
+});
+
 $('#btn-cadastrarTurma').click(function(){
-  exibirFormTurma('Cadastrar Turma','Fechar','Cadastrar',null,null);
+  exibirForm($('#cadastroTurma'),'Cadastrar Turma','Fechar','Cadastrar',null,function(){
+    var output=$('#cadastroTurma output');
+    var dados={
+      nometurma: $('#nometurma').val(),
+      observacaoturma: $('#observacaoturma').val(),
+    };
+    if(dados.nometurma!=""){
+      cadastrarItem(dados,output,'_include/CadastrarTurma.php');
+    }else{
+      output.text("Preencha todos os campos marcados com (*)");
+    }
+  });
 });
 
 $(document).ready(function(){

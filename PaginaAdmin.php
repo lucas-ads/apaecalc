@@ -96,8 +96,8 @@
             <textarea id="observacaoturma" rows="1" cols="40"></textarea>
           </div>
           <output> </output>
-          <button id="btTurma1">Cancelar</button>
-          <button id="btTurma2">Cadastrar</button>
+          <button id="bt1">Cancelar</button>
+          <button id="bt2">Cadastrar</button>
         </div>
     </div>
   </div>
