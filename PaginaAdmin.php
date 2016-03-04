@@ -32,7 +32,7 @@
         <button type="submit">Sair</button>
     </form>
     <button id="btn-cadastrarEstudante">Cadastrar Estudante</button>
-    <button id="btn-cadastrarTurma">Cadastrar Turma</button>
+    <button class="btn-cadastrarTurma">Cadastrar Turma</button>
   </main>
   <div id="testes">
 
@@ -58,6 +58,7 @@
               <select id="select-deficiencia">
 
               </select>
+              <button type="button" name="button" id="btn-cadDeficiencia" class="btn-cadDeficiencia">+</button>
             </div>
             <div class="div-observacao">
               <label for="observacao">Observação:</label>
@@ -68,6 +69,7 @@
               <select id="select-turmas">
 
               </select>
+              <button type="button" name="button" id="btn-cadTurma" class="btn-cadastrarTurma">+</button>
             </div>
             <div class="">
               <label for="password">*Senha:</label>
@@ -94,6 +96,20 @@
           <div class="div-observacao">
             <label for="observacaoturma">Observação:</label>
             <textarea id="observacaoturma" rows="1" cols="40"></textarea>
+          </div>
+          <output> </output>
+          <button id="bt1">Cancelar</button>
+          <button id="bt2">Cadastrar</button>
+        </div>
+    </div>
+  </div>
+  <div id="cadastroDeficiencia" class="form">
+    <div class="foco">
+        <h1>Cadastrar Deficiência</h1>
+        <div id="formCadDeficiencia">
+          <div class="">
+            <label for="nomedeficiencia">*Deficiência:</label>
+            <input type="text" id="nomedeficiencia" required>
           </div>
           <output> </output>
           <button id="bt1">Cancelar</button>

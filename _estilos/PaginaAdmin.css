@@ -99,7 +99,7 @@ div[id*="formCad"] label{
   font-size: 1em;
 }
 
-div[id*="formCad"] input, textarea,select{
+div[id*="formCad"] input, textarea{
   width: 50%;
   font-size: 1.1em;
 }
@@ -135,6 +135,24 @@ div[id*="formCad"] input, textarea,select{
   display: block;
   color: red;
   min-height: 1.3em;
+}
+
+div[id*="formCad"] select{
+  width: 43.5%;
+  font-size: 1.1em;
+}
+
+#btn-cadDeficiencia, #btn-cadTurma{
+  margin: 0;
+  margin-left: 2%;
+  width: 5%;
+  height: 1.15em;
+  padding: 0px;
+  font-size: 1.3em;
+}
+
+#formCadDeficiencia div{
+  text-align: center;
 }
 
 @media only screen and (min-width: 475px){

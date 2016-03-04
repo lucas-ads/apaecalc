@@ -22,4 +22,12 @@
     desconectar($conexao);
     return $resultset['count(*)'];
   }
+
+  function insereDeficiencia($nome){
+    $conexao=conectar();
+    $stmt=$conexao->prepare("insert into deficiencia (nome_deficiencia) values(?);");
+    $stmt->bind_param("s",$nome);
+    $stmt->execute();
+    desconectar($conexao);
+  }
 ?>

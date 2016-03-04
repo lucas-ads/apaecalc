@@ -71,6 +71,7 @@ function cadastrarItem(dados,output,url){
             output.text(data[1]);
             if(data[0]==1){
               output.css('color','green');
+              carregarTurmasDeficiencias();
             }else{
               output.css('color','red');
               if(data[0]=="turma"||data[0]=="deficiencia"){
@@ -81,12 +82,12 @@ function cadastrarItem(dados,output,url){
             }
         },
         error: function(data){
-//          $('#testes').append('<br>error: '+this.tentativas);
+          //$('#testes').append('<br>error: '+this.tentativas);
           this.tentativas+=1;
           if(this.tentativas<3){
             $.ajax(this);
           }else{
-  //          $('#testes').append('<br>Conexão interrompida');
+            //$('#testes').append('<br>Conexão interrompida');
           }
         }
     });
@@ -114,15 +115,29 @@ $('#btn-cadastrarEstudante').click(function(){
   });
 });
 
-$('#btn-cadastrarTurma').click(function(){
+$(document).on('click','.btn-cadastrarTurma',function(){
   exibirForm($('#cadastroTurma'),'Cadastrar Turma','Fechar','Cadastrar',null,function(){
     var output=$('#cadastroTurma output');
     var dados={
       nometurma: $('#nometurma').val(),
-      observacaoturma: $('#observacaoturma').val(),
+      observacaoturma: $('#observacaoturma').val()
     };
     if(dados.nometurma!=""){
       cadastrarItem(dados,output,'_include/CadastrarTurma.php');
+    }else{
+      output.text("Preencha todos os campos marcados com (*)");
+    }
+  });
+});
+
+$(document).on('click','.btn-cadDeficiencia',function(){
+  exibirForm($('#cadastroDeficiencia'),'Cadastrar Deficiência','Fechar','Cadastrar',null,function(){
+    var output=$('#cadastroDeficiencia output');
+    var dados={
+      nomedeficiencia: $('#nomedeficiencia').val()
+    };
+    if(dados.nomedeficiencia!=""){
+      cadastrarItem(dados,output,'_include/CadastrarDeficiencia.php');
     }else{
       output.text("Preencha todos os campos marcados com (*)");
     }
