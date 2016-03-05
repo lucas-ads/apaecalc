@@ -5,6 +5,19 @@
     if(!isset($_SESSION['estudante'])){
         header("Location:index.php");
     }else{
+        $inactive=30;
+        if(isset($_SESSION['timeout'])){
+          $session_life = time() - $_SESSION['timeout'];
+          if($session_life > $inactive){
+            session_destroy();
+            header("Location: deslogarEstudante.php");
+          }else{
+              $_SESSION['timeout'] = time();
+          }
+        }else{
+          $_SESSION['timeout'] = time();
+        }
+
         if(isset($_SESSION['partida'])){
             unset($_SESSION['partida']);
         }
