@@ -5,7 +5,7 @@
     if(!isset($_SESSION['estudante'])){
         header("Location:index.php");
     }else{
-        $inactive=30;
+        $inactive=9000;
         if(isset($_SESSION['timeout'])){
           $session_life = time() - $_SESSION['timeout'];
           if($session_life > $inactive){

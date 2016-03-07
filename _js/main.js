@@ -108,9 +108,11 @@ function controlStage(){
             toogleLine(line);
             if(idline==values_global.length-2){
                 $('#continue').removeAttr('disabled');
+                $('#continue').focus();
             }else{
                 if(idline==values_global.length-1){
                     $('#nextstage').removeAttr('disabled');
+                    $('#nextstage').focus();
                 }else{
                     if(line.next().hasClass('line')==true){
                         toogleLine(line.next());

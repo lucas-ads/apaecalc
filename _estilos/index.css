@@ -1,25 +1,58 @@
 body{
-    font-size: 10px;
-    background-color: rgb(225,239,187);
+    font-size: 9px;
+    margin: 0;
 }
 
 body *{
     font-family: sans-serif;
     font-weight: bold;
-    font-family: Arial Black;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 main#principal{
-    text-align: center;
     display: block;
+    text-align: center;
+}
+
+header#cabecalho{
+    overflow: hidden;
+    text-align: center;
+    background-color: rgb(225,239,187);
+    margin: 0px;
+}
+
+header#cabecalho > img{
+    display: inline-block;
+    width: 11%;
+    margin: 5px;
+    overflow: hidden;
+}
+
+header#cabecalho > img#logoApae{
+    float: left;
+    margin-left: 1em;
+}
+
+header#cabecalho > img#logoIfms{
+    float: right;
+    margin-right: 1em;
+}
+
+header#cabecalho h1{
+    display: inline-block;
+    max-width: 60%;
+    font-size: 1.5em;
 }
 
 form#formlogin{
-    border: solid 2px black;
-    background-color: rgb(220,220,220);
+    border: solid 4px black;
+    background-color: rgb(235,235,235);
+    padding: 13px 20px 20px 20px;
     display: inline-block;
-    padding: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 15px;
 }
 
 form#formlogin > h1{
@@ -53,4 +86,16 @@ form#formlogin button, form#formlogin div.campo{
 
 ::-webkit-input-placeholder{
     color: rgba(200,40,40,0.8);
+}
+
+@media only screen and (min-width: 475px){
+  body{
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 890px){
+    header#cabecalho h1{
+        font-size: 2em;
+    }
 }
