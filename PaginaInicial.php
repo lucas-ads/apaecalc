@@ -71,7 +71,7 @@
                         </div>
                         <div id="checkEmbaralhar">
                             <input type="checkbox" id="embaralhar">
-                            <label for="embaralhar">Embaralhar</label>
+                            <label class="label-checkbox" for="embaralhar">Embaralhar</label>
                         </div>
                     </div>
                     <button id="jogarEstagio">Jogar</button>

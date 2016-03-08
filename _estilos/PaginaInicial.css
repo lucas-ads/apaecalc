@@ -259,14 +259,44 @@ div#home button.icon-logout{
     font-size: 1.8em;
 }
 
+#checkEmbaralhar{
+  margin-top: 1em;
+}
+
+.label-checkbox {
+		cursor: pointer;
+    line-height:1.3em;
+	}
+	#embaralhar{
+		display:none;
+	}
+	.label-checkbox::before {
+		content: "";
+		display: inline-block;
+		width: 21px;
+		height: 21px;
+		vertical-align:middle;
+		background-color: #BBB;
+		color: #000;
+    text-align: center;
+		box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
+		border-radius: 3px;
+    margin-right: 0.5em;
+    font-size: 1.6em;
+	}
+	#embaralhar:checked + .label-checkbox::before {
+		content: "\2713";
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+	}
+
 @media only screen and (min-width: 475px){
     body{
         font-size: 15px;
     }
 
-    div#arcade input[type="checkbox"]{
-        width: 20px;
-        height: 20px;
+    .label-checkbox::before {
+      width: 30px;
+      height: 30px;
     }
 }
 
@@ -274,9 +304,26 @@ div#home button.icon-logout{
     body{
         font-size: 20px;
     }
+
+    .label-checkbox::before {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .label-checkbox{
+      line-height:1em;
+    }
 }
 
 @media only screen and (min-width: 890px){
+    .label-checkbox::before {
+      font-size: 1.6em;
+    }
+
+    .label-checkbox{
+      line-height:1.2em;
+    }
+
     header#cabecalho h1{
         font-size: 2em;
     }
@@ -371,5 +418,13 @@ div#home button.icon-logout{
 
     header#cabecalho h1{
         margin: 0.4em auto;
+    }
+
+    .label-checkbox::before {
+      font-size: 1.3em;
+    }
+
+    .label-checkbox{
+      line-height:1em;
     }
 }

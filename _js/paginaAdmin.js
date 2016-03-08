@@ -19,6 +19,7 @@ function exibirForm(form, titulo, textobt1, textobt2,funcao1,funcao2){
         }
     });
     form.css('display','inline-block');
+    form.find('.foco div:first-child input').focus();
 }
 
 //Função para carregar e exibir Turmas e Deficiências

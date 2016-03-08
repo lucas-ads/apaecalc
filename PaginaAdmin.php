@@ -43,15 +43,15 @@
           <div id="formCadEstudante">
             <div class="">
               <label for="nome">*Nome:</label>
-              <input type="text" id="nome" placeholder="Ex. João da Silva" required>
+              <input type="text" id="nome" placeholder="Ex. João da Silva">
             </div>
             <div class="">
               <label for="nomeusuario">*Nome de Usuário:</label>
-              <input type="text" id="nomeusuario" placeholder="Ex. joao-silva" required>
+              <input type="text" id="nomeusuario" placeholder="Ex. joao-silva">
             </div>
             <div class="">
               <label for="dataNascimento">*Data de Nascimento:</label>
-              <input type="text" id="dataNascimento" placeholder="Ex. 10/05/2005" required>
+              <input type="text" id="dataNascimento" placeholder="Ex. 10/05/2005">
             </div>
             <div class="">
               <label for="">*Possui Deficiência?</label>
@@ -73,11 +73,11 @@
             </div>
             <div class="">
               <label for="password">*Senha:</label>
-              <input type="password" id="password" placeholder="Mínimo: 6 caracteres" required>
+              <input type="password" id="password" placeholder="Mínimo: 6 caracteres">
             </div>
             <div class="">
               <label for="confirm-password">*Confirme a senha:</label>
-              <input type="password" id="confirm-password" placeholder="Repita a senha" required>
+              <input type="password" id="confirm-password" placeholder="Repita a senha">
             </div>
             <output> </output>
             <button id="bt1">Cancelar</button>
