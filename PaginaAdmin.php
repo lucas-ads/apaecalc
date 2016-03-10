@@ -1,5 +1,6 @@
 <?php
   require_once '_include/_classes/Teacher.php';
+  require_once '_include/_cruds/daoTurmas.php';
   session_start();
 
   if(!isset($_SESSION['professor'])){
@@ -9,7 +10,7 @@
     $nome=utf8_encode($professor->get_name());
     $nomes=explode(" ",$nome);
     $doisnomes=(isset($nomes[0])?$nomes[0]:"")." ".(isset($nomes[1])?$nomes[1]:"");
-  }
+    $turmas=exibeDadosTurma();
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +29,24 @@
       <img src="_imagens/logo_ifms.png" id="logoIfms" alt="Logo IFMS">
   </header>
   <main>
+    <table border="1">
+      <thead>
+        <th>Nome da Turma</th>
+        <th>Observação</th>
+        <th>Estudantes</th>
+      </thead>
+      <tbody>
+        <?php
+        if(count($turmas)!=0){
+          for($i=0;$i<count($turmas);$i+=1){
+            echo '<tr value="'.$turmas[$i][0].'"><td>'.$turmas[$i][1].'</td><td>'.$turmas[$i][2].'</td><td>'.$turmas[$i][3].'</td><td></td></tr>';
+          }
+        }else{
+          echo '<tr><td colspan="4">Não existem turmas cadastradas!</td><tr>';
+        }
+        ?>
+      </tbody>
+    </table>
     <form action="deslogarProfessor.php" method="post">
         <button type="submit">Sair</button>
     </form>
@@ -122,3 +141,4 @@
   <script src="_js/paginaAdmin.js"></script>
 </body>
 </html>
+<?php } ?>

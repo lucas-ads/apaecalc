@@ -51,9 +51,13 @@
 
     function insereEstudanteTurma($idEstudante,$idTurma){
       $conexao=conectar();
-      $stmt=$conexao->prepare("insert into historico (id_estudante, id_turma, data_entrada) values(?,?,now());");
-      $stmt->bind_param("ii",$idEstudante,$idTurma);
-      $stmt->execute();
+      $stmt1=$conexao->prepare("update historico set data_saida=now() where id_estudante=? and data_saida is null;");
+      $stmt1->bind_param("i",$idEstudante);
+      $stmt1->execute();
+
+      $stmt2=$conexao->prepare("insert into historico (id_estudante, id_turma, data_entrada) values(?,?,now());");
+      $stmt2->bind_param("ii",$idEstudante,$idTurma);
+      $stmt2->execute();
       desconectar($conexao);
     }
 ?>
