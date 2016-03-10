@@ -20,6 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="_estilos/PaginaAdmin.css" charset="utf-8">
+    <link rel="stylesheet" href="_fonts/entypo.css">
     <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.min.css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
@@ -29,29 +30,36 @@
       <img src="_imagens/logo_ifms.png" id="logoIfms" alt="Logo IFMS">
   </header>
   <main>
-    <table border="1">
-      <thead>
-        <th>Nome da Turma</th>
-        <th>Observação</th>
-        <th>Estudantes</th>
-      </thead>
-      <tbody>
-        <?php
-        if(count($turmas)!=0){
-          for($i=0;$i<count($turmas);$i+=1){
-            echo '<tr value="'.$turmas[$i][0].'"><td>'.$turmas[$i][1].'</td><td>'.$turmas[$i][2].'</td><td>'.$turmas[$i][3].'</td><td></td></tr>';
+    <div id="home">
+      <table id="tableTurmas">
+        <thead>
+          <tr>
+            <th>Turma</th>
+            <th>Estudantes</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          if(count($turmas)!=0){
+            for($i=0;$i<count($turmas);$i+=1){
+              echo '<tr value="'.$turmas[$i][0].'"><td>'.$turmas[$i][1].($turmas[$i][2]==""?"":" - ").$turmas[$i][2].'</td><td>'.$turmas[$i][3].'</td><td><button class="btn-entrar"><span class="icon-right-open"></span></button></td></tr>';
+            }
+          }else{
+            echo '<tr><td colspan="4">Não existem turmas cadastradas!</td><tr>';
           }
-        }else{
-          echo '<tr><td colspan="4">Não existem turmas cadastradas!</td><tr>';
-        }
-        ?>
-      </tbody>
-    </table>
-    <form action="deslogarProfessor.php" method="post">
-        <button type="submit">Sair</button>
-    </form>
-    <button id="btn-cadastrarEstudante">Cadastrar Estudante</button>
-    <button class="btn-cadastrarTurma">Cadastrar Turma</button>
+          ?>
+        </tbody>
+      </table>
+      <form action="deslogarProfessor.php" method="post">
+          <button type="submit">Sair</button>
+      </form>
+      <button id="btn-cadastrarEstudante">Cadastrar Estudante</button>
+      <button class="btn-cadastrarTurma">Cadastrar Turma</button>
+    </div>
+    <div id="turma">
+
+    </div>
   </main>
   <div id="testes">
 
@@ -112,9 +120,9 @@
             <label for="nometurma">*Turma:</label>
             <input type="text" id="nometurma" placeholder="Ex. 3º ANO - B" required>
           </div>
-          <div class="div-observacao">
-            <label for="observacaoturma">Observação:</label>
-            <textarea id="observacaoturma" rows="1" cols="40"></textarea>
+          <div class="div-periodo">
+            <label for="periodoturma">Período:</label>
+            <input type="text" id="periodoturma">
           </div>
           <output> </output>
           <button id="bt1">Cancelar</button>

@@ -154,9 +154,57 @@ div[id*="formCad"] select{
   text-align: center;
 }
 
+#tableTurmas{
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-size: 1.4em;
+}
+
+#tableTurmas td,#tableTurmas th{
+  padding: 0.5em;
+  text-align: left;
+}
+
+#tableTurmas tbody tr:nth-child(odd){
+  background-color: rgb(235,235,235);
+}
+
+#tableTurmas tbody tr:nth-child(even){
+  background-color: rgb(220,220,220);
+}
+
+#tableTurmas thead tr{
+  background-color: rgb(225,239,187);
+}
+
+.btn-entrar{
+  width: 4em;
+  height: 2em;
+  border: none;
+  background: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+.btn-entrar:hover{
+  background: rgb(190,190,190);
+}
+
+.btn-entrar span{
+  font-size: 1.4em;
+}
+
+#turma{
+  display: none;
+}
+
 @media only screen and (min-width: 475px){
   body{
       font-size: 15px;
+  }
+
+  #tableTurmas{
+    font-size: 1.2em;
   }
 }
 
@@ -178,14 +226,19 @@ div[id*="formCad"] select{
     #cadastroEstudante textarea{
       max-height: 100px;
     }
+
+    #tableTurmas{
+      font-size: 1.4em;
+    }
 }
 
 @media only screen and (min-width: 1020px){
-
+  #tableTurmas{
+    font-size: 1.3em;
+  }
 }
 
 @media only screen and (min-width: 1275px){
-
     header#cabecalho h1{
         margin: 0.4em auto;
     }
