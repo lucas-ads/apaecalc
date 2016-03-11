@@ -23,14 +23,14 @@
           }
         }else{
           $_SESSION['professor']=$professor;
-          header("location:PaginaAdmin.php");
+          header("location:Admin.php");
         }
     }else{
       if(isset($_SESSION['estudante'])){
           header("location:PaginaInicial.php");
       }else{
         if(isset($_SESSION['professor'])){
-          header("location:PaginaAdmin.php");
+          header("location:Admin.php");
         }else{
           header("location:index.php");
         }

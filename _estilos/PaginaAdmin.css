@@ -62,7 +62,7 @@ header#cabecalho h1{
 main{
     display: block;
     padding: 0px;
-    margin-top: 2em;
+    margin-top: 0em;
 }
 
 .form{
@@ -160,6 +160,15 @@ div[id*="formCad"] select{
   font-size: 1.4em;
 }
 
+#local{
+  margin-left: 3em;
+}
+
+#local h2{
+  font-size: 1.5em;
+  display: inline-block;
+}
+
 #tableTurmas td,#tableTurmas th{
   padding: 0.5em;
   text-align: left;
@@ -175,6 +184,10 @@ div[id*="formCad"] select{
 
 #tableTurmas thead tr{
   background-color: rgb(225,239,187);
+}
+
+#tableTurmas tbody tr td:nth-child(2){
+  text-align: center;
 }
 
 .btn-entrar{

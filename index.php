@@ -14,7 +14,7 @@
             header("location:PaginaInicial.php");
         }else{
           if(isset($_SESSION['professor'])){
-            header("location:PaginaAdmin.php");
+            header("location:Admin.php");
           }else{
               $place_username="";
               $username="";

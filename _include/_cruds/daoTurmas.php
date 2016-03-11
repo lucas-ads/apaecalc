@@ -15,6 +15,19 @@
     return $turmas;
   }
 
+  function carregaTurma($id){
+    $conexao=conectar();
+    $resultset = mysqli_query($conexao,"select * from turma where id=".$id.";");
+
+    $turma=null;
+    if($row = mysqli_fetch_assoc($resultset)) {
+      $turma=$row;
+    }
+
+    desconectar($conexao);
+    return $turma;
+  }
+
   function verificaIdTurma($id){
     $conexao=conectar();
     $resultset = mysqli_query($conexao,"select count(*) from turma where id='".$id."';");

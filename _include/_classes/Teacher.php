@@ -21,5 +21,11 @@
     public function get_name(){
       return $this->name;
     }
+
+    public function get_twofirstname(){
+      $names=explode(" ",$this->name);
+      $twonames=(isset($names[0])?$names[0]:"")." ".(isset($names[1])?$names[1]:"");
+      return $twonames;
+    }
   }
 ?>

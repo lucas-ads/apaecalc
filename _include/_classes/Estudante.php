@@ -29,12 +29,19 @@ class Estudante {
         return $this->nome;
     }
 
+    public function get_twonames(){
+      $names=explode(" ",$this->nome);
+      $twonames=(isset($names[0])?$names[0]:"")." ".(isset($names[count($names)-1])?$names[count($names)-1]:"");
+      return $twonames;
+    }
+
     public function get_nomeusuario(){
         return $this->nomeusuario;
     }
 
     public function get_datanascimento(){
-        return $this->datanascimento;
+        $data=explode('-',$this->datanascimento);
+        return $data[2].'/'.$data[1].'/'.$data[0];
     }
 
     public function get_operacao(){

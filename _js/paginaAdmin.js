@@ -94,30 +94,6 @@ function cadastrarItem(dados,output,url){
     });
 }
 
-$(document).on('click','.btn-entrar',function(){
-  var id=$(this).parent().parent().attr('value');
-  $('#home').css('display','none');
-  $('#turma').css('display','inline-block');
-  /*$.ajax({
-      url: '_include/CarregarTurmasDeficiencias.php',
-      dataType: 'text',
-      type: 'POST',
-      tentativas: 0,
-      success: function(data){
-
-      },
-      error: function(data){
-        //$('#testes').append('<br>error: '+this.tentativas);
-        this.tentativas+=1;
-        if(this.tentativas<3){
-          $.ajax(this);
-        }else{
-          //$('#testes').append('<br>Conexão interrompida');
-        }
-      }
-  });*/
-});
-
 $('#btn-cadastrarEstudante').click(function(){
   carregarTurmasDeficiencias();
   exibirForm($('#cadastroEstudante'),'Cadastrar Estudante','Fechar','Cadastrar',null,function(){

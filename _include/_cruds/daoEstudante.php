@@ -60,4 +60,20 @@
       $stmt2->execute();
       desconectar($conexao);
     }
+
+    function getEstudanteByClass($idClass){
+      $idClass=intval($idClass);
+      $conexao = conectar();
+
+      $resultset = mysqli_query($conexao,"select * from estudante where estudante.id in (select id_estudante from historico where id_turma = ".$idClass." and historico.data_saida is null);");
+
+      $resultado = [];
+      while($row=mysqli_fetch_assoc($resultset)){
+          $estudante = new Estudante($row['id'],$row['nome'],$row['nome_usuario'],$row['data_nascimento'],$row['operacao'],$row['etapa'],$row['rodada'],$row['embaralhar']);
+          $resultado[] = $estudante;
+      }
+
+      desconectar($conexao);
+      return $resultado;
+    }
 ?>
