@@ -24,6 +24,7 @@ function exibirForm(form, titulo, textobt1, textobt2,funcao1,funcao2){
 
 //Função para carregar e exibir Turmas e Deficiências
 function carregarTurmasDeficiencias(){
+  //$('#testes').append("<p>Carregando turmas e deficiencias</p>");
   $('#select-turmas').html('');
   $('#select-deficiencia').html('');
   $.ajax({
@@ -38,9 +39,11 @@ function carregarTurmasDeficiencias(){
           var selectTurmas=$('#select-turmas');
           var selectDeficiencia=$('#select-deficiencia');
           var option="<option value='{{value}}'>{{nome}}</option>";
+          selectDeficiencia.append(option.replace('{{value}}',0).replace('{{nome}}','Selecione...'));
           for(var i = 0; i<deficiencias.length;i+=1){
             selectDeficiencia.append(option.replace('{{value}}',deficiencias[i][0]).replace('{{nome}}',deficiencias[i][1]));
           }
+          selectTurmas.append(option.replace('{{value}}',0).replace('{{nome}}','Selecione...'));
           for(var i = 0; i<turmas.length;i+=1){
             selectTurmas.append(option.replace('{{value}}',turmas[i][0]).replace('{{nome}}',turmas[i][1]));
           }
@@ -58,7 +61,8 @@ function carregarTurmasDeficiencias(){
 }
 
 //Função para, ao receber os dados, o elemento de saída e o endereço do arquivo php, cadastra-los e tratar os seus retornos
-function cadastrarItem(dados,output,url){
+function cadastrarItem(dados,output,url,funcaoSucesso){
+    //$('#testes').append("<p>Cadastrando Item</p>");
     output.text('');
     $.ajax({
         url: url,
@@ -70,9 +74,9 @@ function cadastrarItem(dados,output,url){
             //$('#testes').append('<br>success: '+this.tentativas);
             //$('#testes').append(data);
             output.text(data[1]);
-            if(data[0]==1){
+            if($.isNumeric(data[0])){
               output.css('color','green');
-              carregarTurmasDeficiencias();
+              funcaoSucesso(dados,data);
             }else{
               output.css('color','red');
               if(data[0]=="turma"||data[0]=="deficiencia"){
@@ -95,7 +99,6 @@ function cadastrarItem(dados,output,url){
 }
 
 $('#btn-cadastrarEstudante').click(function(){
-  carregarTurmasDeficiencias();
   exibirForm($('#cadastroEstudante'),'Cadastrar Estudante','Fechar','Cadastrar',null,function(){
     var output=$('#cadastroEstudante output');
     var dados={
@@ -108,8 +111,11 @@ $('#btn-cadastrarEstudante').click(function(){
       senha: $('#password').val(),
       confirmasenha: $('#confirm-password').val()
     };
-    if(dados.nomeusuario!=""&&dados.nome!=""&&dados.dataNascimento!=""&&dados.senha!=""&&dados.confirmasenha!=""){
-      cadastrarItem(dados,output,'_include/CadastrarEstudante.php');
+    if(dados.nomeusuario!=""&&dados.nome!=""&&dados.dataNascimento!=""&&dados.senha!=""&&dados.confirmasenha!=""&&dados.turma>0&&dados.deficiencia>0){
+      cadastrarItem(dados,output,'_include/CadastrarEstudante.php',function(dadosEnviados,dadosRecebidos){
+        var td=$('tr[value='+dadosEnviados.turma+'] td:nth-child(2)');
+        td.text(parseInt(td.text())+1);
+      });
     }else{
       output.text("Preencha todos os campos marcados com (*)");
     }
@@ -124,7 +130,13 @@ $(document).on('click','.btn-cadastrarTurma',function(){
       periodoturma: $('#periodoturma').val()
     };
     if(dados.nometurma!=""){
-      cadastrarItem(dados,output,'_include/CadastrarTurma.php');
+      cadastrarItem(dados,output,'_include/CadastrarTurma.php',function(dadosEnviados,dadosRecebidos){
+          var table=$('#tableTurmas');
+          var linha='<tr value="'+dadosRecebidos[0]+'"><td>'+dadosEnviados.nometurma+(dadosEnviados.periodoturma==""?"":" - ")+dadosEnviados.periodoturma+'</td><td>0</td><td><form action="Turma.php" method="get"><button class="btn-entrar"><input type="hidden" name="idturma" value="'+dadosRecebidos[0]+'"><span class="icon-right-open"></span></button></form></td></tr>';
+          table.find('tbody').append(linha);
+          var option="<option value='"+dadosRecebidos[0]+"'>"+dadosEnviados.nometurma+"</option>";
+          $('#select-turmas').append(option);
+      });
     }else{
       output.text("Preencha todos os campos marcados com (*)");
     }
@@ -138,7 +150,10 @@ $(document).on('click','.btn-cadDeficiencia',function(){
       nomedeficiencia: $('#nomedeficiencia').val()
     };
     if(dados.nomedeficiencia!=""){
-      cadastrarItem(dados,output,'_include/CadastrarDeficiencia.php');
+      cadastrarItem(dados,output,'_include/CadastrarDeficiencia.php', function(dadosEnviados,dadosRecebidos){
+        var option="<option value='"+dadosRecebidos[0]+"'>"+dadosEnviados.nomedeficiencia+"</option>";
+        $('#select-deficiencia').append(option);
+      });
     }else{
       output.text("Preencha todos os campos marcados com (*)");
     }
@@ -159,4 +174,5 @@ $(document).ready(function(){
     monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
     monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
   });
+  carregarTurmasDeficiencias();
 });

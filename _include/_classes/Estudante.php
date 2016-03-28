@@ -31,7 +31,11 @@ class Estudante {
 
     public function get_twonames(){
       $names=explode(" ",$this->nome);
-      $twonames=(isset($names[0])?$names[0]:"")." ".(isset($names[count($names)-1])?$names[count($names)-1]:"");
+      if(count($names)>1){
+        $twonames=(isset($names[0])?$names[0]:"")." ".(isset($names[count($names)-1])?$names[count($names)-1]:"");
+      }else{
+        $twonames=$names[0];
+      }
       return $twonames;
     }
 

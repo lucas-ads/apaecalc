@@ -40,6 +40,7 @@
     <table id="tableEstudantes">
         <thead>
           <tr>
+            <th></th>
             <th>Nome</th>
             <th>Usuário</th>
             <th>Nascimento</th>
@@ -50,6 +51,7 @@
           if(count($estudantes)>0){
             for($i=0;$i<count($estudantes);$i+=1){
               echo '<tr value="'.$estudantes[$i]->get_id().'">
+                      <td><input type="checkbox"></td>
                       <td>'.utf8_encode($estudantes[$i]->get_twonames()).'</td>
                       <td>'.$estudantes[$i]->get_nomeusuario().'</td>
                       <td>'.$estudantes[$i]->get_datanascimento().'</td>

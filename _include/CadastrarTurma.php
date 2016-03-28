@@ -20,8 +20,8 @@
         return 0;
       }
 
-      insereTurma(utf8_decode($nome),utf8_decode($periodo));
-      echo json_encode(array(1,'Turma cadastrada com sucesso!'));
+      $id=insereTurma(utf8_decode($nome),utf8_decode($periodo));
+      echo json_encode(array($id,'Turma cadastrada com sucesso!'));
     }
   }
  ?>

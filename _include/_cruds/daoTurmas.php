@@ -41,13 +41,15 @@
     $stmt=$conexao->prepare("insert into turma (nome_turma,periodo) values(?,?);");
     $stmt->bind_param("ss",$nome,$observacao);
     $stmt->execute();
+    $id=$conexao->insert_id;
     desconectar($conexao);
+    return $id;
   }
 
   function exibeDadosTurma(){
     $conexao=conectar();
 
-    $resultset = mysqli_query($conexao,"select turma.*, count(historico.id_turma) as quant from turma inner join historico on turma.id=historico.id_turma where historico.data_saida is null group by(turma.id);");
+    $resultset = mysqli_query($conexao,"select turma.*, count(historico.id_turma) as quant from turma inner join historico on turma.id=historico.id_turma where historico.data_saida is null group by(turma.id) order by turma.nome_turma;");
     $turmas=[];
     while($row = mysqli_fetch_assoc($resultset)) {
       $turmas[]=array($row['id'],utf8_encode($row['nome_turma']),utf8_encode($row['periodo']),$row['quant']);

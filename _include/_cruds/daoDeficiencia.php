@@ -28,6 +28,8 @@
     $stmt=$conexao->prepare("insert into deficiencia (nome_deficiencia) values(?);");
     $stmt->bind_param("s",$nome);
     $stmt->execute();
+    $id=$conexao->insert_id;
     desconectar($conexao);
+    return $id;
   }
 ?>
