@@ -37,6 +37,7 @@
         <thead>
           <tr>
             <th>Turma</th>
+            <th>Periodo</th>
             <th>Estudantes</th>
             <th></th>
           </tr>
@@ -46,11 +47,18 @@
           if(count($turmas)!=0){
             for($i=0;$i<count($turmas);$i+=1){
               echo '<tr value="'.$turmas[$i][0].'">
-                      <td>'.$turmas[$i][1].($turmas[$i][2]==""?"":" - ").$turmas[$i][2].'</td>
+                      <td>'.$turmas[$i][1].'</td>
+                      <td>'.$turmas[$i][2].'</td>
                       <td>'.$turmas[$i][3].'</td>
                       <td>
-                        <form action="Turma.php" method="get">
-                          <button class="btn-entrar">
+                        <button class="btn-excluirturma btn-actionturma">
+                          <span class="icon-cancel"></span>
+                        </button>
+                        <button class="btn-editarturma btn-actionturma">
+                          <img src="_imagens/icone-editar.png" alt="Editar"/>
+                        </button>
+                        <form id="form-entrarturma" action="Turma.php" method="get">
+                          <button class="btn-entrar btn-actionturma">
                             <input type="hidden" name="idturma" value="'.$turmas[$i][0].'">
                             <span class="icon-right-open"></span>
                           </button>
@@ -153,6 +161,27 @@
         </div>
     </div>
   </div>
+  <script id="template-linhaturma" type="text/template">
+    <tr value="{{idturma}}">
+      <td>{{nometurma}}</td>
+      <td>{{periodoturma}}</td>
+      <td>0</td>
+      <td>
+        <button class="btn-excluirturma btn-actionturma">
+          <span class="icon-cancel"></span>
+        </button>
+        <button class="btn-editarturma btn-actionturma">
+          <img src="_imagens/icone-editar.png" alt="Editar"/>
+        </button>
+        <form id="form-entrarturma" action="Turma.php" method="get">
+          <button class="btn-entrar btn-actionturma">
+            <input type="hidden" name="idturma" value="{{idturma}}">
+            <span class="icon-right-open"></span>
+          </button>
+        </form>
+      </td>
+    </tr>
+  </script>
   <script src="_js/jquery-2.1.4.min.js"></script>
   <script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
   <script src="_js/paginaAdmin.js"></script>

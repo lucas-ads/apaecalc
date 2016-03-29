@@ -36,10 +36,23 @@
     return $resultset['count(*)'];
   }
 
-  function insereTurma($nome,$observacao){
+  function editaTurma($id,$nome,$periodo){
+    if(verificaIdTurma($id)==0){
+      $result=-1;
+    }else{
+      $conexao=conectar();
+      $stmt=$conexao->prepare("update turma set nome_turma=?, periodo=? where id=?;");
+      $stmt->bind_param("ssi",$nome,$periodo,$id);
+      $result=$stmt->execute();
+      desconectar($conexao);
+    }
+    return $result;
+  }
+
+  function insereTurma($nome,$periodo){
     $conexao=conectar();
     $stmt=$conexao->prepare("insert into turma (nome_turma,periodo) values(?,?);");
-    $stmt->bind_param("ss",$nome,$observacao);
+    $stmt->bind_param("ss",$nome,$periodo);
     $stmt->execute();
     $id=$conexao->insert_id;
     desconectar($conexao);

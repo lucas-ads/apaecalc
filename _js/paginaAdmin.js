@@ -1,5 +1,5 @@
 //Função para exibir formularios
-function exibirForm(form, titulo, textobt1, textobt2,funcao1,funcao2){
+function exibirForm(form, titulo, textobt1, textobt2,funcao1,funcao2,id){
     form.find('input').val('');
     form.find('textarea').val('');
     form.find('output').val('');
@@ -15,7 +15,7 @@ function exibirForm(form, titulo, textobt1, textobt2,funcao1,funcao2){
     form.find('#bt2').text(textobt2);
     form.find('#bt2').click(function(){
         if(typeof(funcao2)=='function'){
-            funcao2();
+            funcao2(id);
         }
     });
     form.css('display','inline-block');
@@ -119,28 +119,52 @@ $('#btn-cadastrarEstudante').click(function(){
     }else{
       output.text("Preencha todos os campos marcados com (*)");
     }
-  });
+  },0);
 });
 
-$(document).on('click','.btn-cadastrarTurma',function(){
-  exibirForm($('#cadastroTurma'),'Cadastrar Turma','Fechar','Cadastrar',null,function(){
-    var output=$('#cadastroTurma output');
-    var dados={
-      nometurma: $('#nometurma').val(),
-      periodoturma: $('#periodoturma').val()
-    };
-    if(dados.nometurma!=""){
-      cadastrarItem(dados,output,'_include/CadastrarTurma.php',function(dadosEnviados,dadosRecebidos){
+//Se id<=0 a função irá cadastrar uma turma, caso contrário a função irá tentar editar a turma referente ao id
+function cadastrarEditarTurma(id){
+  var output=$('#cadastroTurma output');
+  var dados={
+    nometurma: $('#nometurma').val(),
+    periodoturma: $('#periodoturma').val(),
+    idturma:id
+  };
+  if(dados.nometurma!=""){
+    cadastrarItem(dados,output,'_include/CadastrarTurma.php',function(dadosEnviados,dadosRecebidos){
+        if(dadosEnviados.idturma<=0){
           var table=$('#tableTurmas');
-          var linha='<tr value="'+dadosRecebidos[0]+'"><td>'+dadosEnviados.nometurma+(dadosEnviados.periodoturma==""?"":" - ")+dadosEnviados.periodoturma+'</td><td>0</td><td><form action="Turma.php" method="get"><button class="btn-entrar"><input type="hidden" name="idturma" value="'+dadosRecebidos[0]+'"><span class="icon-right-open"></span></button></form></td></tr>';
+          var linha=$('#template-linhaturma').text()
+            .replace('{{idturma}}',dadosRecebidos[0])
+            .replace('{{idturma}}',dadosRecebidos[0])
+            .replace('{{nometurma}}',dadosEnviados.nometurma)
+            .replace('{{periodoturma}}',dadosEnviados.periodoturma);
           table.find('tbody').append(linha);
           var option="<option value='"+dadosRecebidos[0]+"'>"+dadosEnviados.nometurma+"</option>";
           $('#select-turmas').append(option);
-      });
-    }else{
-      output.text("Preencha todos os campos marcados com (*)");
-    }
-  });
+        }else{
+          var tr=$('tr[value='+dadosEnviados.idturma+']');
+          tr.find('td:nth-child(1)').text(dadosEnviados.nometurma);
+          tr.find('td:nth-child(2)').text(dadosEnviados.periodoturma);
+          var option=$('option[value='+dadosEnviados.idturma+']');
+          option.text(dadosEnviados.nometurma);
+        }
+    });
+  }else{
+    output.text("Preencha todos os campos marcados com (*)");
+  }
+}
+
+$(document).on('click','.btn-cadastrarTurma',function(){
+  exibirForm($('#cadastroTurma'),'Cadastrar Turma','Fechar','Cadastrar',null,cadastrarEditarTurma,0);
+});
+
+$(document).on('click','.btn-editarturma',function(){
+  var id=parseInt($(this).parent().parent().attr('value'));
+  exibirForm($('#cadastroTurma'),'Editar Turma','Fechar','Salvar',null,cadastrarEditarTurma,id);
+  $('#nometurma').val($('tr[value='+id+'] td:nth-child(1)').text());
+  $('#periodoturma').val($('tr[value='+id+'] td:nth-child(2)').text());
+  $('#nometurma').select();
 });
 
 $(document).on('click','.btn-cadDeficiencia',function(){
@@ -157,7 +181,7 @@ $(document).on('click','.btn-cadDeficiencia',function(){
     }else{
       output.text("Preencha todos os campos marcados com (*)");
     }
-  });
+  },0);
 });
 
 $(document).ready(function(){

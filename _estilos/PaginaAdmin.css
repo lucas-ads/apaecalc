@@ -186,25 +186,42 @@ div[id*="formCad"] select{
   background-color: rgb(225,239,187);
 }
 
-#tableTurmas tbody tr td:nth-child(2){
+#tableTurmas tbody tr td:nth-child(3){
   text-align: center;
 }
 
-.btn-entrar{
-  width: 4em;
+#form-entrarturma{
+  display: inline-block;
+}
+
+.btn-actionturma{
+  width: 3em;
   height: 2em;
   border: none;
   background: none;
   border-radius: 0.5em;
   cursor: pointer;
+  display: inline-block;
 }
 
-.btn-entrar:hover{
+.btn-actionturma:hover{
   background: rgb(190,190,190);
 }
 
-.btn-entrar span{
-  font-size: 1.4em;
+.btn-actionturma span{
+  font-size: 1.7em;
+}
+
+.btn-editarturma img{
+  width: 70%;
+}
+
+.btn-excluirturma{
+  color: red;
+}
+
+tr>td:last-child{
+  white-space: nowrap;
 }
 
 #turma{

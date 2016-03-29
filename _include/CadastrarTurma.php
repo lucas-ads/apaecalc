@@ -6,9 +6,10 @@
   if(!isset($_SESSION['professor'])){
       echo 'Erro ao salvar a partida, faça login novamente!';
   }else{
-    if(isset($_POST['nometurma'])&&isset($_POST['periodoturma'])){
+    if(isset($_POST['nometurma'])&&isset($_POST['periodoturma'])&&isset($_POST['idturma'])){
       $nome=addslashes(strtoupper(trim($_POST['nometurma'])));
       $periodo=addslashes(trim($_POST['periodoturma']));
+      $idturma=intval($_POST['idturma']);
 
       if(strlen($nome)<5||strlen($nome)>20){
         echo json_encode(array('nometurma','O nome da turma deve ter entre 5 e 20 caracteres'));
@@ -20,8 +21,17 @@
         return 0;
       }
 
-      $id=insereTurma(utf8_decode($nome),utf8_decode($periodo));
-      echo json_encode(array($id,'Turma cadastrada com sucesso!'));
+      if($idturma<=0){
+        $id=insereTurma(utf8_decode($nome),utf8_decode($periodo));
+        echo json_encode(array($id,'Turma cadastrada com sucesso!'));
+      }else{
+        $result=editaTurma($idturma,utf8_decode($nome),utf8_decode($periodo));
+        if($result==1){
+          echo json_encode(array(1,"Turma editada com sucesso!"));
+        }else{
+          echo json_encode(array('error','Recarregue a página e tente novamente!'));
+        }
+      }
     }
   }
  ?>
