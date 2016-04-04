@@ -220,6 +220,15 @@ div[id*="formCad"] select{
   color: red;
 }
 
+.btn-excluirturma:disabled{
+  color: gray;
+}
+
+.btn-excluirturma:disabled:hover{
+  background: none;
+  cursor: inherit;
+}
+
 tr>td:last-child{
   white-space: nowrap;
 }

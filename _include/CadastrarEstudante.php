@@ -72,7 +72,7 @@
         return 0;
       }
 
-      $idEstudante=insereEstudante(utf8_decode($nome),$nomeusuario,$dataNascimento,utf8_decode($observacao),$senha,$deficiencia);
+      $idEstudante=insereEstudante(utf8_decode($nome),$nomeusuario,$dataNascimento,utf8_decode($observacao),$senha,$deficiencia,$turma);
       insereEstudanteTurma($idEstudante,$turma);
       echo json_encode(array(1,'Estudante cadastrado com sucesso'));
     }

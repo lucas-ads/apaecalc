@@ -113,8 +113,9 @@ $('#btn-cadastrarEstudante').click(function(){
     };
     if(dados.nomeusuario!=""&&dados.nome!=""&&dados.dataNascimento!=""&&dados.senha!=""&&dados.confirmasenha!=""&&dados.turma>0&&dados.deficiencia>0){
       cadastrarItem(dados,output,'_include/CadastrarEstudante.php',function(dadosEnviados,dadosRecebidos){
-        var td=$('tr[value='+dadosEnviados.turma+'] td:nth-child(2)');
+        var td=$('tr[value='+dadosEnviados.turma+'] td:nth-child(3)');
         td.text(parseInt(td.text())+1);
+        $('tr[value='+dadosEnviados.turma+'] .btn-excluirturma').attr('disabled', 'disabled');
       });
     }else{
       output.text("Preencha todos os campos marcados com (*)");

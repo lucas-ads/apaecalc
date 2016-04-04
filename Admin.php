@@ -46,12 +46,13 @@
           <?php
           if(count($turmas)!=0){
             for($i=0;$i<count($turmas);$i+=1){
+              $disabled=$turmas[$i][4]==0?"":"disabled";
               echo '<tr value="'.$turmas[$i][0].'">
                       <td>'.$turmas[$i][1].'</td>
                       <td>'.$turmas[$i][2].'</td>
                       <td>'.$turmas[$i][3].'</td>
                       <td>
-                        <button class="btn-excluirturma btn-actionturma">
+                        <button class="btn-excluirturma btn-actionturma" '.$disabled.'>
                           <span class="icon-cancel"></span>
                         </button>
                         <button class="btn-editarturma btn-actionturma">

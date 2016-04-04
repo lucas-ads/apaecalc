@@ -39,10 +39,10 @@
         desconectar($conexao);
     }
 
-    function insereEstudante($nome,$nomeusuario,$dataNascimento,$observacao,$senha,$deficiencia){
+    function insereEstudante($nome,$nomeusuario,$dataNascimento,$observacao,$senha,$deficiencia,$turma){
       $conexao=conectar();
-      $stmt=$conexao->prepare("insert into estudante (nome,nome_usuario,senha,data_nascimento,observacao,deficiencia) values(?,?,md5(?),?,?,?);");
-      $stmt->bind_param("sssssi",$nome,$nomeusuario,$senha,$dataNascimento,$observacao,$deficiencia);
+      $stmt=$conexao->prepare("insert into estudante (nome,nome_usuario,senha,data_nascimento,observacao,deficiencia,turma_atual) values(?,?,md5(?),?,?,?,?);");
+      $stmt->bind_param("sssssii",$nome,$nomeusuario,$senha,$dataNascimento,$observacao,$deficiencia,$turma);
       $stmt->execute();
       $id = $conexao->insert_id;
       desconectar($conexao);
@@ -65,7 +65,7 @@
       $idClass=intval($idClass);
       $conexao = conectar();
 
-      $resultset = mysqli_query($conexao,"select * from estudante where estudante.id in (select id_estudante from historico where id_turma = ".$idClass." and historico.data_saida is null);");
+      $resultset = mysqli_query($conexao,"select * from estudante where turma_atual=".$idClass." order by nome;");
 
       $resultado = [];
       while($row=mysqli_fetch_assoc($resultset)){
