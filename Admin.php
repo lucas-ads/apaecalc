@@ -162,6 +162,16 @@
         </div>
     </div>
   </div>
+  <div id="exclusaoTurma" class="form">
+    <div class="foco">
+        <h1></h1>
+        <div id="formCadDeficiencia">
+          <output> </output>
+          <button id="bt1">Cancelar</button>
+          <button id="bt2">Cadastrar</button>
+        </div>
+    </div>
+  </div>
   <script id="template-linhaturma" type="text/template">
     <tr value="{{idturma}}">
       <td>{{nometurma}}</td>

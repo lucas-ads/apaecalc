@@ -61,7 +61,7 @@ function carregarTurmasDeficiencias(){
 }
 
 //Função para, ao receber os dados, o elemento de saída e o endereço do arquivo php, cadastra-los e tratar os seus retornos
-function cadastrarItem(dados,output,url,funcaoSucesso){
+function cadastrarItem(dados,output,url,funcaoSucesso,funcaoFalha){
     //$('#testes').append("<p>Cadastrando Item</p>");
     output.text('');
     $.ajax({
@@ -78,6 +78,7 @@ function cadastrarItem(dados,output,url,funcaoSucesso){
               output.css('color','green');
               funcaoSucesso(dados,data);
             }else{
+              funcaoFalha();
               output.css('color','red');
               if(data[0]=="turma"||data[0]=="deficiencia"){
                 carregarTurmasDeficiencias();
@@ -116,7 +117,7 @@ $('#btn-cadastrarEstudante').click(function(){
         var td=$('tr[value='+dadosEnviados.turma+'] td:nth-child(3)');
         td.text(parseInt(td.text())+1);
         $('tr[value='+dadosEnviados.turma+'] .btn-excluirturma').attr('disabled', 'disabled');
-      });
+      },null);
     }else{
       output.text("Preencha todos os campos marcados com (*)");
     }
@@ -150,7 +151,7 @@ function cadastrarEditarTurma(id){
           var option=$('option[value='+dadosEnviados.idturma+']');
           option.text(dadosEnviados.nometurma);
         }
-    });
+    },null);
   }else{
     output.text("Preencha todos os campos marcados com (*)");
   }
@@ -178,10 +179,31 @@ $(document).on('click','.btn-cadDeficiencia',function(){
       cadastrarItem(dados,output,'_include/CadastrarDeficiencia.php', function(dadosEnviados,dadosRecebidos){
         var option="<option value='"+dadosRecebidos[0]+"'>"+dadosEnviados.nomedeficiencia+"</option>";
         $('#select-deficiencia').append(option);
-      });
+      },null);
     }else{
       output.text("Preencha todos os campos marcados com (*)");
     }
+  },0);
+});
+
+$(document).on('click','.btn-excluirturma',function(){
+  var id=$(this).parent().parent().attr('value');
+  exibirForm($('#exclusaoTurma'),"Deseja excluir a turma?","Cancelar","Confirmar",null,function(){
+    var output=$('#exclusaoTurma output');
+    var dados={
+      idturma:id
+    };
+    cadastrarItem(dados,output,'_include/ExcluirTurma.php',function(dadosEnviados,dadosRecebidos){
+      $('tr[value='+dadosEnviados.idturma+']').remove();
+      $('#exclusaoTurma').css('display','none');
+    },function(){
+      var bt2=$('#exclusaoTurma #bt2');
+      bt2.off();
+      bt2.text('OK');
+      bt2.click(function(){
+        $('#exclusaoTurma').css('display','none');
+      });
+    });
   },0);
 });
 

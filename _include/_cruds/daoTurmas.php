@@ -59,6 +59,26 @@
     return $id;
   }
 
+  //Retorna -1 se a turma não existe, -2 se a turma possui vinculos, 1 se ocorreu tudo certo
+  function excluiTurma($idturma){
+    if(verificaIdTurma($idturma)==0){
+      $result=-1;
+    }else{
+      $conexao=conectar();
+      $result=mysqli_fetch_assoc(mysqli_query($conexao,"select count(id) from historico where id_turma=".$idturma.";"));
+      $result=$result['count(id)'];
+      if($result==0){
+        $stmt=$conexao->prepare("delete from turma where id=?");
+        $stmt->bind_param("i",$idturma);
+        $result=intval($stmt->execute());
+      }else{
+        $result=-2;
+      }
+      desconectar($conexao);
+    }
+    return $result;
+  }
+
   function exibeDadosTurma(){
     $conexao=conectar();
 
