@@ -58,12 +58,9 @@
                         <button class="btn-editarturma btn-actionturma">
                           <img src="_imagens/icone-editar.png" alt="Editar"/>
                         </button>
-                        <form id="form-entrarturma" action="Turma.php" method="get">
-                          <button class="btn-entrar btn-actionturma">
-                            <input type="hidden" name="idturma" value="'.$turmas[$i][0].'">
-                            <span class="icon-right-open"></span>
-                          </button>
-                        </form>
+                        <button class="btn-entrar btn-actionturma">
+                          <span class="icon-right-open"></span>
+                        </button>
                       </td>
                     </tr>';
             }
@@ -184,12 +181,9 @@
         <button class="btn-editarturma btn-actionturma">
           <img src="_imagens/icone-editar.png" alt="Editar"/>
         </button>
-        <form id="form-entrarturma" action="Turma.php" method="get">
-          <button class="btn-entrar btn-actionturma">
-            <input type="hidden" name="idturma" value="{{idturma}}">
-            <span class="icon-right-open"></span>
-          </button>
-        </form>
+        <button class="btn-entrar btn-actionturma">
+          <span class="icon-right-open"></span>
+        </button>
       </td>
     </tr>
   </script>

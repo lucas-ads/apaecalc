@@ -190,8 +190,8 @@ div[id*="formCad"] select{
   text-align: center;
 }
 
-#form-entrarturma{
-  display: inline-block;
+#tableTurmas tbody tr td:first-child{
+  cursor: pointer;
 }
 
 .btn-actionturma{

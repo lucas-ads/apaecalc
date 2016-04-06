@@ -207,6 +207,11 @@ $(document).on('click','.btn-excluirturma',function(){
   },0);
 });
 
+$(document).on('click','#tableTurmas tr td:first-child, .btn-entrar',function(){
+  var id=parseInt($(this).parents('tr').attr('value'));
+  window.location.href = "Turma.php?idturma="+id;
+});
+
 $(document).ready(function(){
   $( "#dataNascimento" ).datepicker({
     maxDate: '-1Y',
