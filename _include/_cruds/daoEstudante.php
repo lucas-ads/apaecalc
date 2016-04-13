@@ -39,10 +39,10 @@
         desconectar($conexao);
     }
 
-    function insereEstudante($nome,$nomeusuario,$dataNascimento,$observacao,$senha,$deficiencia,$turma){
+    function insereEstudante($nome,$nomeusuario,$dataNascimento,$observacao,$senha,$deficiencia,$turma,$embaralharjogo){
       $conexao=conectar();
-      $stmt=$conexao->prepare("insert into estudante (nome,nome_usuario,senha,data_nascimento,observacao,deficiencia,turma_atual) values(?,?,md5(?),?,?,?,?);");
-      $stmt->bind_param("sssssii",$nome,$nomeusuario,$senha,$dataNascimento,$observacao,$deficiencia,$turma);
+      $stmt=$conexao->prepare("insert into estudante (nome,nome_usuario,senha,data_nascimento,observacao,deficiencia,turma_atual,embaralhar) values(?,?,md5(?),?,?,?,?,?);");
+      $stmt->bind_param("sssssiii",$nome,$nomeusuario,$senha,$dataNascimento,$observacao,$deficiencia,$turma,$embaralharjogo);
       $stmt->execute();
       $id = $conexao->insert_id;
       desconectar($conexao);

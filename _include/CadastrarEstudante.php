@@ -9,7 +9,7 @@
   if(!isset($_SESSION['professor'])){
       echo 'Erro ao salvar a partida, faça login novamente!';
   }else{
-    if(isset($_POST['deficiencia'])&&isset($_POST['nome'])&&isset($_POST['nomeusuario'])&&isset($_POST['dataNascimento'])&&isset($_POST['observacao'])&&isset($_POST['turma'])&&isset($_POST['senha'])&&isset($_POST['confirmasenha'])){
+    if(isset($_POST['deficiencia'])&&isset($_POST['nome'])&&isset($_POST['nomeusuario'])&&isset($_POST['dataNascimento'])&&isset($_POST['observacao'])&&isset($_POST['turma'])&&isset($_POST['senha'])&&isset($_POST['confirmasenha'])&&isset($_POST['embaralharjogo'])){
       $nome=ucwords(strtolower(trim($_POST['nome'])));
       $nomeusuario=strtolower(trim($_POST['nomeusuario']));
       $dataNascimento=trim($_POST['dataNascimento']);
@@ -18,6 +18,7 @@
       $deficiencia=intval($_POST['deficiencia']);
       $senha=$_POST['senha'];
       $confirmasenha=$_POST['confirmasenha'];
+      $embaralharjogo=intval($_POST['embaralharjogo']);
 
       $resultado=preg_match('/^[a-zá-ú\ ]{10,45}$/i', $nome);
       if(!$resultado){
@@ -49,6 +50,11 @@
       }
       $dataNascimento=$diaMesAno[2].'-'.$diaMesAno[1].'-'.$diaMesAno[0];
 
+      if($embaralharjogo<0||$embaralharjogo>1){
+        echo json_encode(array('radio-noembaralhar','Ops! Houve um erro, recarregue a página e tente novamente!'));
+        return 0;
+      }
+
       $resultado=verificaIdTurma($turma);
       if($resultado<1){
         echo json_encode(array('turma','Turma inválida, tente novamente!'));
@@ -72,7 +78,7 @@
         return 0;
       }
 
-      $idEstudante=insereEstudante(utf8_decode($nome),$nomeusuario,$dataNascimento,utf8_decode($observacao),$senha,$deficiencia,$turma);
+      $idEstudante=insereEstudante(utf8_decode($nome),$nomeusuario,$dataNascimento,utf8_decode($observacao),$senha,$deficiencia,$turma,$embaralharjogo);
       insereEstudanteTurma($idEstudante,$turma);
       echo json_encode(array(1,'Estudante cadastrado com sucesso'));
     }

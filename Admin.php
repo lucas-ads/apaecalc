@@ -107,6 +107,15 @@
               <textarea id="observacao" rows="1" cols="40"></textarea>
             </div>
             <div class="">
+              <label>*Embaralhar questões?</label>
+              <div class="radio-embaralhar">
+                <input type="radio" name="radio-embaralhar" id="radio-embaralhar" value="1">
+                <label for="radio-embaralhar">Sim</label>
+                <input type="radio" name="radio-embaralhar" id="radio-noembaralhar" value="0" checked>
+                <label for="radio-noembaralhar">Não</label>
+              </div>
+            </div>
+            <div class="">
               <label for="">*Selecione a Turma:</label>
               <select id="select-turmas">
 

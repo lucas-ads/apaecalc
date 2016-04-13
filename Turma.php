@@ -44,6 +44,7 @@
             <th>Nome</th>
             <th>Usuário</th>
             <th>Nascimento</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -55,6 +56,11 @@
                       <td>'.utf8_encode($estudantes[$i]->get_twonames()).'</td>
                       <td>'.$estudantes[$i]->get_nomeusuario().'</td>
                       <td>'.$estudantes[$i]->get_datanascimento().'</td>
+                      <td>
+                      <button class="btn-editarestudante btn-actionestudante">
+                        <img src="_imagens/icone-editar.png" alt="Editar"/>
+                      </button>
+                      </td>
                     </tr>';
             }
           }else{
@@ -98,6 +104,15 @@
             <div class="div-observacao">
               <label for="observacao">Observação:</label>
               <textarea id="observacao" rows="1" cols="40"></textarea>
+            </div>
+            <div class="">
+              <label>*Embaralhar questões?</label>
+              <div class="radio-embaralhar">
+                <input type="radio" name="radio-embaralhar" id="radio-embaralhar" value="1">
+                <label for="radio-embaralhar">Sim</label>
+                <input type="radio" name="radio-embaralhar" id="radio-noembaralhar" value="0" checked>
+                <label for="radio-noembaralhar">Não</label>
+              </div>
             </div>
             <div class="">
               <label for="">*Selecione a Turma:</label>

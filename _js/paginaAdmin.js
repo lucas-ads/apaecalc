@@ -1,6 +1,6 @@
 //Função para exibir formularios
 function exibirForm(form, titulo, textobt1, textobt2,funcao1,funcao2,id){
-    form.find('input').val('');
+    form.find('input:not([type="radio"])').val('');
     form.find('textarea').val('');
     form.find('output').val('');
     form.find('button').off();
@@ -78,7 +78,9 @@ function cadastrarItem(dados,output,url,funcaoSucesso,funcaoFalha){
               output.css('color','green');
               funcaoSucesso(dados,data);
             }else{
-              funcaoFalha();
+              if(funcaoFalha!=null){
+                  funcaoFalha();
+              }
               output.css('color','red');
               if(data[0]=="turma"||data[0]=="deficiencia"){
                 carregarTurmasDeficiencias();
@@ -110,9 +112,10 @@ $('#btn-cadastrarEstudante').click(function(){
       turma: $('#select-turmas').val(),
       deficiencia: $('#select-deficiencia').val(),
       senha: $('#password').val(),
-      confirmasenha: $('#confirm-password').val()
+      confirmasenha: $('#confirm-password').val(),
+      embaralharjogo: $("input[name='radio-embaralhar']:checked").val()
     };
-    if(dados.nomeusuario!=""&&dados.nome!=""&&dados.dataNascimento!=""&&dados.senha!=""&&dados.confirmasenha!=""&&dados.turma>0&&dados.deficiencia>0){
+    if(dados.nomeusuario!=""&&dados.nome!=""&&dados.dataNascimento!=""&&dados.senha!=""&&dados.confirmasenha!=""&&dados.turma>0&&dados.deficiencia>0&&dados.embaralharjogo>-1&&dados.embaralharjogo<2){
       cadastrarItem(dados,output,'_include/CadastrarEstudante.php',function(dadosEnviados,dadosRecebidos){
         var td=$('tr[value='+dadosEnviados.turma+'] td:nth-child(3)');
         td.text(parseInt(td.text())+1);
