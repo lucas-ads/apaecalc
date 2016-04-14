@@ -2,7 +2,7 @@
     require_once "ConnectionDatabase.php";
 
     function salvarPerguntas($idPartida,$values){
-        $comando="insert into Pergunta (id_partida, primeiro_valor, segundo_valor) values ";
+        $comando="insert into pergunta (id_partida, primeiro_valor, segundo_valor) values ";
         $sqlValues="";
 
         for($i=0;$i<count($values);$i++){
