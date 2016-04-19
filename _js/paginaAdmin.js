@@ -120,6 +120,7 @@ $('#btn-cadastrarEstudante').click(function(){
         var td=$('tr[value='+dadosEnviados.turma+'] td:nth-child(3)');
         td.text(parseInt(td.text())+1);
         $('tr[value='+dadosEnviados.turma+'] .btn-excluirturma').attr('disabled', 'disabled');
+        $('#formCadEstudante').find('#nome,#nomeusuario,#dataNascimento,#observacao').val('');
       },null);
     }else{
       output.text("Preencha todos os campos marcados com (*)");
@@ -213,6 +214,13 @@ $(document).on('click','.btn-excluirturma',function(){
 $(document).on('click','#tableTurmas tr td:first-child, .btn-entrar',function(){
   var id=parseInt($(this).parents('tr').attr('value'));
   window.location.href = "Turma.php?idturma="+id;
+});
+
+$(document).on('blur','#formCadEstudante input#nome',function(){
+  var texto = $('#formCadEstudante input#nome').val().split(' ');
+  if(texto.length>=2){
+    $('#formCadEstudante input#nomeusuario').val((texto[0]+texto[1]).toLowerCase().replace(/[áàâã]/g,'a').replace(/[éèê]/g,'e').replace(/[óòôõ]/g,'o').replace(/[úùû]/g,'u'));
+  }
 });
 
 $(document).ready(function(){

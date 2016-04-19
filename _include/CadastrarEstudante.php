@@ -80,7 +80,7 @@
 
       $idEstudante=insereEstudante(utf8_decode($nome),$nomeusuario,$dataNascimento,utf8_decode($observacao),$senha,$deficiencia,$turma,$embaralharjogo);
       insereEstudanteTurma($idEstudante,$turma);
-      echo json_encode(array(1,'Estudante cadastrado com sucesso'));
+      echo json_encode(array(1,$nomeusuario.' cadastrado(a) com sucesso'));
     }
   }
  ?>
