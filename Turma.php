@@ -96,7 +96,7 @@
             </div>
             <div class="">
               <label for="">*Possui Deficiência?</label>
-              <select id="select-deficiencia">
+              <select id="select-deficiencia" class="select-deficiencia">
 
               </select>
               <button type="button" name="button" id="btn-cadDeficiencia" class="btn-cadDeficiencia">+</button>
@@ -116,10 +116,9 @@
             </div>
             <div class="">
               <label for="">*Selecione a Turma:</label>
-              <select id="select-turmas">
-
+              <select id="select-turmas" disabled style="color: #333;">
+                <option value="<?php echo $idturma; ?>"><?php echo utf8_encode($turma['nome_turma']); ?></option>
               </select>
-              <button type="button" name="button" id="btn-cadTurma" class="btn-cadastrarTurma">+</button>
             </div>
             <div class="">
               <label for="password">*Senha:</label>
@@ -135,17 +134,41 @@
           </div>
       </div>
   </div>
-  <div id="cadastroTurma" class="form">
+  <div id="edicaoDadosGerais" class="form">
     <div class="foco">
-        <h1>Cadastrar Turma</h1>
-        <div id="formCadTurma">
+        <h1>Atualizar Informações Gerais</h1>
+        <div id="formCadDadosGerais">
           <div class="">
-            <label for="nometurma">*Turma:</label>
-            <input type="text" id="nometurma" placeholder="Ex. 3º ANO - B" required>
+            <label for="edicaonome">*Nome:</label>
+            <input type="text" id="edicaonome" placeholder="Ex. João da Silva">
           </div>
-          <div class="div-periodo">
-            <label for="periodoturma">Período:</label>
-            <input type="text" id="periodoturma">
+          <div class="">
+            <label for="edicaonomeusuario">*Nome de Usuário:</label>
+            <input type="text" id="edicaonomeusuario" placeholder="Ex. joao-silva">
+          </div>
+          <div class="">
+            <label for="edicaodataNascimento">*Data de Nascimento:</label>
+            <input type="text" id="edicaodataNascimento" placeholder="Ex. 10/05/2005">
+          </div>
+          <div class="">
+            <label for="">*Possui Deficiência?</label>
+            <select id="edicaoselect-deficiencia" class="select-deficiencia">
+
+            </select>
+            <button type="button" name="button" id="btn-cadDeficiencia" class="btn-cadDeficiencia">+</button>
+          </div>
+          <div class="div-observacao">
+            <label for="edicaoobservacao">Observação:</label>
+            <textarea id="edicaoobservacao" rows="1" cols="40"></textarea>
+          </div>
+          <div class="">
+            <label>*Embaralhar questões?</label>
+            <div class="radio-embaralhar">
+              <input type="radio" name="edicaoradio-embaralhar" id="edicaoradio-embaralhar" value="1">
+              <label for="edicaoradio-embaralhar">Sim</label>
+              <input type="radio" name="edicaoradio-embaralhar" id="edicaoradio-noembaralhar" value="0" checked>
+              <label for="edicaoradio-noembaralhar">Não</label>
+            </div>
           </div>
           <output> </output>
           <button id="bt1">Cancelar</button>
@@ -167,9 +190,22 @@
         </div>
     </div>
   </div>
+  <script id="template-linhaestudante" type="text/template">
+    <tr value="{{idestudante}}">
+      <td><input type="checkbox"></td>
+      <td>{{nomeestudante}}</td>
+      <td>{{nomeusuario}}</td>
+      <td>{{datadenascimento}}</td>
+      <td>
+          <button class="btn-editarestudante btn-actionestudante">
+          <img src="_imagens/icone-editar.png" alt="Editar"/>
+          </button>
+      </td>
+    </tr>
+  </script>
   <script src="_js/jquery-2.1.4.min.js"></script>
   <script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-  <script src="_js/paginaAdmin.js"></script>
+  <script src="_js/paginaTurma.js"></script>
 </body>
 </html>
 <?php }} ?>

@@ -101,31 +101,35 @@ function cadastrarItem(dados,output,url,funcaoSucesso,funcaoFalha){
     });
 }
 
+//Se id<=0 a função irá cadastrar uma turma, caso contrário a função irá tentar editar a turma referente ao id
+function cadastrarEditarEstudante(id){
+  var output=$('#cadastroEstudante output');
+  var dados={
+    nomeusuario:$('#nomeusuario').val(),
+    nome:$('#nome').val(),
+    dataNascimento:$('#dataNascimento').val(),
+    observacao:$('#observacao').val(),
+    turma: $('#select-turmas').val(),
+    deficiencia: $('#select-deficiencia').val(),
+    senha: $('#password').val(),
+    confirmasenha: $('#confirm-password').val(),
+    embaralharjogo: $("input[name='radio-embaralhar']:checked").val()
+  };
+  if(dados.nomeusuario!=""&&dados.nome!=""&&dados.dataNascimento!=""&&dados.senha!=""&&dados.confirmasenha!=""&&dados.turma>0&&dados.deficiencia>0&&dados.embaralharjogo>-1&&dados.embaralharjogo<2){
+    cadastrarItem(dados,output,'_include/CadastrarEstudante.php',function(dadosEnviados,dadosRecebidos){
+      var td=$('tr[value='+dadosEnviados.turma+'] td:nth-child(3)');
+      td.text(parseInt(td.text())+1);
+      $('tr[value='+dadosEnviados.turma+'] .btn-excluirturma').attr('disabled', 'disabled');
+      $('#formCadEstudante').find('#nome,#nomeusuario,#dataNascimento,#observacao').val('');
+      $('#formCadEstudante #nome').focus();
+    },null);
+  }else{
+    output.text("Preencha todos os campos marcados com (*)");
+  }
+}
+
 $('#btn-cadastrarEstudante').click(function(){
-  exibirForm($('#cadastroEstudante'),'Cadastrar Estudante','Fechar','Cadastrar',null,function(){
-    var output=$('#cadastroEstudante output');
-    var dados={
-      nomeusuario:$('#nomeusuario').val(),
-      nome:$('#nome').val(),
-      dataNascimento:$('#dataNascimento').val(),
-      observacao:$('#observacao').val(),
-      turma: $('#select-turmas').val(),
-      deficiencia: $('#select-deficiencia').val(),
-      senha: $('#password').val(),
-      confirmasenha: $('#confirm-password').val(),
-      embaralharjogo: $("input[name='radio-embaralhar']:checked").val()
-    };
-    if(dados.nomeusuario!=""&&dados.nome!=""&&dados.dataNascimento!=""&&dados.senha!=""&&dados.confirmasenha!=""&&dados.turma>0&&dados.deficiencia>0&&dados.embaralharjogo>-1&&dados.embaralharjogo<2){
-      cadastrarItem(dados,output,'_include/CadastrarEstudante.php',function(dadosEnviados,dadosRecebidos){
-        var td=$('tr[value='+dadosEnviados.turma+'] td:nth-child(3)');
-        td.text(parseInt(td.text())+1);
-        $('tr[value='+dadosEnviados.turma+'] .btn-excluirturma').attr('disabled', 'disabled');
-        $('#formCadEstudante').find('#nome,#nomeusuario,#dataNascimento,#observacao').val('');
-      },null);
-    }else{
-      output.text("Preencha todos os campos marcados com (*)");
-    }
-  },0);
+  exibirForm($('#cadastroEstudante'),'Cadastrar Estudante','Fechar','Cadastrar',null,cadastrarEditarEstudante,0);
 });
 
 //Se id<=0 a função irá cadastrar uma turma, caso contrário a função irá tentar editar a turma referente ao id
@@ -219,7 +223,7 @@ $(document).on('click','#tableTurmas tr td:first-child, .btn-entrar',function(){
 $(document).on('blur','#formCadEstudante input#nome',function(){
   var texto = $('#formCadEstudante input#nome').val().split(' ');
   if(texto.length>=2){
-    $('#formCadEstudante input#nomeusuario').val((texto[0]+texto[1]).toLowerCase().replace(/[áàâã]/g,'a').replace(/[éèê]/g,'e').replace(/[óòôõ]/g,'o').replace(/[úùû]/g,'u'));
+    $('#formCadEstudante input#nomeusuario').val((texto[0]+texto[1]).toLowerCase().replace(/[áàâã]/g,'a').replace(/[éèê]/g,'e').replace(/[îíì]/g,'i').replace(/[óòôõ]/g,'o').replace(/[úùû]/g,'u').replace(/[ç]/g,'c'));
   }
 });
 

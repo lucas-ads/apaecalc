@@ -188,7 +188,7 @@ div[id*="formCad"] input:not([type="radio"]), textarea,.radio-embaralhar{
   vertical-align: super;
 }
 
-#cadastroEstudante #nomeusuario{
+#cadastroEstudante #nomeusuario, #edicaoDadosGerais #edicaonomeusuario{
   text-transform: none;
 }
 
@@ -211,8 +211,13 @@ div[id*="formCad"] input:not([type="radio"]), textarea,.radio-embaralhar{
   min-height: 1.3em;
 }
 
-div[id*="formCad"] select{
+div[id*="formCad"] select.select-deficiencia{
   width: 38.7%;
+  font-size: 1.1em;
+}
+
+div[id*="formCad"] select#select-turmas{
+  width: 46%;
   font-size: 1.1em;
 }
 
