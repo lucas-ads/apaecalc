@@ -8,7 +8,7 @@
 
     $turmas=[];
     while($row = mysqli_fetch_assoc($resultset)) {
-      $turmas[]=array($row['id'],utf8_encode($row['nome_turma']));
+      $turmas[]=array($row['id'],$row['nome_turma']);
     }
 
     desconectar($conexao);
@@ -85,7 +85,7 @@
     $resultset = mysqli_query($conexao,"select turma.*, COUNT(historico.id_turma)-count(historico.data_saida) as quant, COUNT(historico.id_turma) as vinculo FROM turma LEFT OUTER JOIN historico ON turma.id=historico.id_turma GROUP BY turma.id order by turma.nome_turma;");
     $turmas=[];
     while($row = mysqli_fetch_assoc($resultset)) {
-      $turmas[]=array($row['id'],utf8_encode($row['nome_turma']),utf8_encode($row['periodo']),$row['quant'],$row['vinculo']);
+      $turmas[]=array($row['id'],$row['nome_turma'],$row['periodo'],$row['quant'],$row['vinculo']);
     }
 
     desconectar($conexao);

@@ -7,7 +7,7 @@
       header("Location:index.php");
   }else{
     $professor=$_SESSION['professor'];
-    $nome=utf8_encode($professor->get_name());
+    $nome=$professor->get_name();
     $nomes=explode(" ",$nome);
     $doisnomes=(isset($nomes[0])?$nomes[0]:"")." ".(isset($nomes[1])?$nomes[1]:"");
     $turmas=exibeDadosTurma();

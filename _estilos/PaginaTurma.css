@@ -188,8 +188,20 @@ div[id*="formCad"] input:not([type="radio"]), textarea,.radio-embaralhar{
   vertical-align: super;
 }
 
+.edicaosenha{
+  display: none;
+}
+
 #cadastroEstudante #nomeusuario, #edicaoDadosGerais #edicaonomeusuario{
   text-transform: none;
+}
+
+#edicaoDadosGerais #check-alterarsenha{
+  width: auto;
+}
+
+#check-alterarsenha:checked ~ .edicaosenha{
+  display: block;
 }
 
 .form button{

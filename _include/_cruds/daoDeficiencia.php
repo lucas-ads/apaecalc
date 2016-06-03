@@ -8,7 +8,7 @@
 
     $deficiencias=[];
     while($row = mysqli_fetch_assoc($resultset)) {
-      $deficiencias[]=array($row['id'],utf8_encode($row['nome_deficiencia']));
+      $deficiencias[]=array($row['id'],$row['nome_deficiencia']);
     }
 
     desconectar($conexao);

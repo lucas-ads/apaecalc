@@ -102,9 +102,10 @@ function cadastrarItem(dados,output,url,funcaoSucesso,funcaoFalha){
 }
 
 //Se id<=0 a função irá cadastrar uma turma, caso contrário a função irá tentar editar a turma referente ao id
-function cadastrarEditarEstudante(id){
+function cadastrarEstudante(id){
   var output=$('#cadastroEstudante output');
   var dados={
+    operacao: "CADASTRAR",
     nomeusuario:$('#nomeusuario').val(),
     nome:$('#nome').val(),
     dataNascimento:$('#dataNascimento').val(),
@@ -116,7 +117,7 @@ function cadastrarEditarEstudante(id){
     embaralharjogo: $("input[name='radio-embaralhar']:checked").val()
   };
   if(dados.nomeusuario!=""&&dados.nome!=""&&dados.dataNascimento!=""&&dados.senha!=""&&dados.confirmasenha!=""&&dados.turma>0&&dados.deficiencia>0&&dados.embaralharjogo>-1&&dados.embaralharjogo<2){
-    cadastrarItem(dados,output,'_include/CadastrarEstudante.php',function(dadosEnviados,dadosRecebidos){
+    cadastrarItem(dados,output,'_include/CadastrarEditarEstudante.php',function(dadosEnviados,dadosRecebidos){
       var td=$('tr[value='+dadosEnviados.turma+'] td:nth-child(3)');
       td.text(parseInt(td.text())+1);
       $('tr[value='+dadosEnviados.turma+'] .btn-excluirturma').attr('disabled', 'disabled');
@@ -129,7 +130,7 @@ function cadastrarEditarEstudante(id){
 }
 
 $('#btn-cadastrarEstudante').click(function(){
-  exibirForm($('#cadastroEstudante'),'Cadastrar Estudante','Fechar','Cadastrar',null,cadastrarEditarEstudante,0);
+  exibirForm($('#cadastroEstudante'),'Cadastrar Estudante','Fechar','Cadastrar',null,cadastrarEstudante,0);
 });
 
 //Se id<=0 a função irá cadastrar uma turma, caso contrário a função irá tentar editar a turma referente ao id

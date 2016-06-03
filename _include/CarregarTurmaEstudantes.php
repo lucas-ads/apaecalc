@@ -9,7 +9,7 @@
   }else{
     if(isset($_POST['idturma'])&&is_numeric($_POST['idturma'])){
       $turma=carregaTurma($_POST['idturma']);
-      $turma=array($turma['id'],utf8_encode($turma['nome_turma']),utf8_encode($turma['periodo']));
+      $turma=array($turma['id'],$turma['nome_turma'],$turma['periodo']);
       echo json_encode($turma);
     }
   }

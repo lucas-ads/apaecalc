@@ -22,10 +22,10 @@
       }
 
       if($idturma<=0){
-        $id=insereTurma(utf8_decode($nome),utf8_decode($periodo));
+        $id=insereTurma($nome,$periodo);
         echo json_encode(array($id,'Turma cadastrada com sucesso!'));
       }else{
-        $result=editaTurma($idturma,utf8_decode($nome),utf8_decode($periodo));
+        $result=editaTurma($idturma,$nome,$periodo);
         if($result==1){
           echo json_encode(array(1,"Turma editada com sucesso!"));
         }else{

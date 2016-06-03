@@ -3,6 +3,7 @@ function exibirForm(form, titulo, textobt1, textobt2,funcao1,funcao2,id){
     form.find('input:not([type="radio"])').val('');
     form.find('textarea').val('');
     form.find('output').val('');
+    form.find('input[type="checkbox"]').prop("checked",false);
     form.find('button').off();
     form.find('h1').html(titulo);
     form.find('#bt1').text(textobt1);
@@ -32,8 +33,9 @@ function carregarDeficiencias(){
       type: 'POST',
       tentativas: 0,
       success: function(data){
+          //$('#testes').append(data);
+          //alert(data);
           var deficiencias=data[0];
-          //$('#testes').append('<br>success: '+this.tentativas);
           var selectDeficiencia=$('#select-deficiencia');
           var edicaoselectDeficiencia=$('#edicaoselect-deficiencia');
           var option="<option value='{{value}}'>{{nome}}</option>";
@@ -81,7 +83,11 @@ function cadastrarItem(dados,output,url,funcaoSucesso,funcaoFalha){
               if(data[0]=="deficiencia"){
                 carregarDeficiencias();
               }else{
-                $('#'+data[0]).select();
+                if(dados.operacao=="CADASTRAR"){
+                  $('#'+data[0]).select();
+                }else{
+                  $('#edicao'+data[0]).select();
+                }
               }
             }
         },
@@ -97,10 +103,48 @@ function cadastrarItem(dados,output,url,funcaoSucesso,funcaoFalha){
     });
 }
 
+//Povoa o formulário de Edição de Estudante
+function povoarEdicaoEstudante(id){
+  $('#idEstudanteEdicao').val(id);
+  var dados = {idEstudante:id};
+  $.ajax({
+      url: '_include/CarregarDadosPessoaisEstudante.php',
+      dataType: 'json',
+      type: 'POST',
+      data: dados,
+      tentativas: 0,
+      success: function(data){
+        //$('#testes').append("1" + data);
+          if(data[0]==1){
+            $('#edicaonome').val(data[1]);
+            $('#edicaonomeusuario').val(data[2]);
+            $('#edicaodataNascimento').val(data[3]);
+            $('#edicaoselect-deficiencia option:eq("'+data[4]+'")').prop('selected', true);
+            $('#edicaoobservacao').val(data[5]);
+            if(data[6]==0){
+              $('#edicaoradio-noembaralhar').prop('checked',true);
+            }else{
+              $('#edicaoradio-embaralhar').prop('checked',true);
+            }
+          }
+      },
+      error: function(data){
+        $('#testes').append('<br>error: '+this.tentativas);
+        this.tentativas+=1;
+        if(this.tentativas<3){
+          $.ajax(this);
+        }else{
+          //$('#testes').append('<br>Conexão interrompida');
+        }
+      }
+  });
+}
+
 //Se id<=0 a função irá cadastrar uma turma, caso contrário a função irá tentar editar a turma referente ao id
-function cadastrarEditarEstudante(id){
+function cadastrarEstudante(id){
   var output=$('#cadastroEstudante output');
   var dados={
+    operacao: "CADASTRAR",
     nomeusuario:$('#nomeusuario').val(),
     nome:$('#nome').val(),
     dataNascimento:$('#dataNascimento').val(),
@@ -112,19 +156,52 @@ function cadastrarEditarEstudante(id){
     embaralharjogo: $("input[name='radio-embaralhar']:checked").val()
   };
   if(dados.nomeusuario!=""&&dados.nome!=""&&dados.dataNascimento!=""&&dados.senha!=""&&dados.confirmasenha!=""&&dados.turma>0&&dados.deficiencia>0&&dados.embaralharjogo>-1&&dados.embaralharjogo<2){
-    cadastrarItem(dados,output,'_include/CadastrarEstudante.php',function(dadosEnviados,dadosRecebidos){
+    cadastrarItem(dados,output,'_include/CadastrarEditarEstudante.php',function(dadosEnviados,dadosRecebidos){
       var template=$('#template-linhaestudante').text();
-      var twonames=dadosEnviados.nome.split(" ");
-      if(twonames.length>1){
-        twonames=twonames[0]+" "+twonames[twonames.length-1];
+      var nome="";
+      if(dadosEnviados.nome.length<=25){
+        nome=dadosEnviados.nome;
       }else{
-        twonames=twonames[0];
+        nome=dadosEnviados.nome.substring(0,22)+"...";
       }
       template=template.replace('{{idestudante}}',dadosRecebidos[0])
-                      .replace('{{nomeestudante}}',twonames)
+                      .replace('{{nomeestudante}}',nome)
                       .replace('{{nomeusuario}}',dadosEnviados.nomeusuario)
                       .replace('{{datadenascimento}}',dadosEnviados.dataNascimento);
       $('#tableEstudantes tbody').append(template);
+      $('#formCadEstudante').find('#nome,#nomeusuario,#dataNascimento,#observacao').val('');
+    },null);
+  }else{
+    output.text("Preencha todos os campos marcados com (*)");
+  }
+}
+
+function editarEstudante(id){
+  var output=$('#edicaoDadosGerais output');
+  var dados={
+    operacao: "EDITAR",
+    idEstudante: $('#idEstudanteEdicao').val(),
+    nomeusuario:$('#edicaonomeusuario').val(),
+    nome:$('#edicaonome').val(),
+    dataNascimento:$('#edicaodataNascimento').val(),
+    observacao:$('#edicaoobservacao').val(),
+    deficiencia: $('#edicaoselect-deficiencia').val(),
+    senha: $('#edicaopassword').val(),
+    alterarsenha: $('#check-alterarsenha').prop("checked")==true?1:0,
+    confirmasenha: $('#edicaoconfirm-password').val(),
+    embaralharjogo: $("input[name='edicaoradio-embaralhar']:checked").val()
+  };
+  if(dados.nomeusuario!=""&&dados.nome!=""&&dados.dataNascimento!=""&&dados.deficiencia>0&&dados.embaralharjogo>-1&&dados.embaralharjogo<2&&!(dados.alterarsenha==1&&(dados.senha==""||dados.confirmasenha==""))){
+    cadastrarItem(dados,output,'_include/CadastrarEditarEstudante.php',function(dadosEnviados,dadosRecebidos){
+      var linhaestudante=$('#tableEstudantes tbody tr[value="'+dadosEnviados.idEstudante+'"]');
+      if(dadosEnviados.nome.length<=25){
+        linhaestudante.find('td:nth-child(2)').text(dadosEnviados.nome);
+      }else{
+        linhaestudante.find('td:nth-child(2)').text(dadosEnviados.nome.substring(0,22)+"...");
+      }
+      linhaestudante.find('td:nth-child(3)').text(dadosEnviados.nomeusuario);
+      linhaestudante.find('td:nth-child(4)').text(dadosEnviados.dataNascimento);
+      $("#edicaoDadosGerais #bt1").text("FECHAR");
     },null);
   }else{
     output.text("Preencha todos os campos marcados com (*)");
@@ -132,11 +209,13 @@ function cadastrarEditarEstudante(id){
 }
 
 $('#btn-cadastrarEstudante').click(function(){
-  exibirForm($('#cadastroEstudante'),'Cadastrar Estudante','Fechar','Cadastrar',null,cadastrarEditarEstudante,0);
+  exibirForm($('#cadastroEstudante'),'Cadastrar Estudante','Fechar','Cadastrar',null,cadastrarEstudante,0);
 });
 
-$('.btn-editarestudante').click(function(){
-  exibirForm($('#edicaoDadosGerais'),'Atualizar Informações','Cancelar','Salvar',null,cadastrarEditarEstudante,0);
+$(document).on('click','.btn-editarestudante',function(){
+  exibirForm($('#edicaoDadosGerais'),'Atualizar Informações','Cancelar','Salvar',null,editarEstudante,0);
+  var id=parseInt($(this).parent().parent().attr('value'));
+  povoarEdicaoEstudante(id);
 });
 
 $(document).on('click','.btn-cadDeficiencia',function(){

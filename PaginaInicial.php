@@ -26,7 +26,7 @@
         $operacao=$estudante->get_operacao();
         $nomeoperacao=$estudante->get_nomeoperacao();
 
-        $nomes=explode(" ",utf8_encode($estudante->get_nome()));
+        $nomes=explode(" ",$estudante->get_nome());
         $doisnomes=(isset($nomes[0])?$nomes[0]:"")." ".(isset($nomes[1])?$nomes[1]:"");
 ?>
 

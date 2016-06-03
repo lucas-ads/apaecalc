@@ -10,11 +10,11 @@
   }else{
     if(isset($_GET['idturma'])){
       $professor=$_SESSION['professor'];
-      $nome=utf8_encode($professor->get_twofirstname());
+      $nome=$professor->get_twofirstname();
       $idturma=$_GET['idturma'];
       $turma=carregaTurma($idturma);
       $estudantes=getEstudanteByClass($idturma);
-      $nometurma=utf8_encode('/'.$turma['nome_turma'].($turma['periodo']==""?"":" - ").$turma['periodo']);
+      $nometurma=('/'.$turma['nome_turma'].($turma['periodo']==""?"":" - ").$turma['periodo']);
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +53,7 @@
             for($i=0;$i<count($estudantes);$i+=1){
               echo '<tr value="'.$estudantes[$i]->get_id().'">
                       <td><input type="checkbox"></td>
-                      <td>'.utf8_encode($estudantes[$i]->get_twonames()).'</td>
+                      <td>'.$estudantes[$i]->get_nomeabrev().'</td>
                       <td>'.$estudantes[$i]->get_nomeusuario().'</td>
                       <td>'.$estudantes[$i]->get_datanascimento().'</td>
                       <td>
@@ -117,7 +117,7 @@
             <div class="">
               <label for="">*Selecione a Turma:</label>
               <select id="select-turmas" disabled style="color: #333;">
-                <option value="<?php echo $idturma; ?>"><?php echo utf8_encode($turma['nome_turma']); ?></option>
+                <option value="<?php echo $idturma; ?>"><?php echo $turma['nome_turma']; ?></option>
               </select>
             </div>
             <div class="">
@@ -135,6 +135,7 @@
       </div>
   </div>
   <div id="edicaoDadosGerais" class="form">
+    <input type="hidden" id="idEstudanteEdicao">
     <div class="foco">
         <h1>Atualizar Informações Gerais</h1>
         <div id="formCadDadosGerais">
@@ -169,6 +170,16 @@
               <input type="radio" name="edicaoradio-embaralhar" id="edicaoradio-noembaralhar" value="0" checked>
               <label for="edicaoradio-noembaralhar">Não</label>
             </div>
+          </div>
+          <input type="checkbox" id="check-alterarsenha">
+          <label for="check-alterarsenha">Alterar senha</label>
+          <div class="edicaosenha">
+              <label for="edicaopassword">*Senha:</label>
+              <input type="password" id="edicaopassword" placeholder="Mínimo: 6 caracteres">
+          </div>
+          <div class="edicaosenha">
+              <label for="edicaoconfirm-password">*Confirme a senha:</label>
+              <input type="password" id="edicaoconfirm-password" placeholder="Repita a senha">
           </div>
           <output> </output>
           <button id="bt1">Cancelar</button>

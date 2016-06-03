@@ -14,7 +14,7 @@
         return 0;
       }
 
-      $id=insereDeficiencia(utf8_decode($nome));
+      $id=insereDeficiencia($nome);
       echo json_encode(array($id,'Deficiência cadastrada com sucesso!'));
     }
   }
