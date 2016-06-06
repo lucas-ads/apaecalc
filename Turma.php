@@ -37,6 +37,7 @@
     <div id="local">
       <a href="Admin.php">Turmas</a><h2><?php echo $nometurma;?></h2>
     </div>
+    <input type="button" id="btn-transferir" name="name" class="disabled" value="Transferir">
     <table id="tableEstudantes">
         <thead>
           <tr>
@@ -52,10 +53,10 @@
           if(count($estudantes)>0){
             for($i=0;$i<count($estudantes);$i+=1){
               echo '<tr value="'.$estudantes[$i]->get_id().'">
-                      <td><input type="checkbox"></td>
-                      <td>'.$estudantes[$i]->get_nomeabrev().'</td>
-                      <td>'.$estudantes[$i]->get_nomeusuario().'</td>
-                      <td>'.$estudantes[$i]->get_datanascimento().'</td>
+                      <td class="td-check"><input class="check-estudante" type="checkbox"></td>
+                      <td class="td-nome">'.$estudantes[$i]->get_nomeabrev().'</td>
+                      <td class="td-nomeusuario">'.$estudantes[$i]->get_nomeusuario().'</td>
+                      <td class="td-datanascimento">'.$estudantes[$i]->get_datanascimento().'</td>
                       <td>
                       <button class="btn-editarestudante btn-actionestudante">
                         <img src="_imagens/icone-editar.png" alt="Editar"/>

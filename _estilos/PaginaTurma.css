@@ -73,6 +73,37 @@ main{
 
 #local{
   margin-left: 3em;
+  display: inline-block;
+}
+
+.check-estudante{
+  cursor: pointer;
+}
+
+#btn-transferir{
+  float: right;
+  margin-right: 15%;
+  margin-top: 1em;
+  background: gray;
+  color: white;
+  padding: 0.4em;
+  font-size: 1.1em;
+  letter-spacing: 0.2em;
+  border-radius: 0.4em;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+#btn-transferir:not(.disabled){
+  background-color: #00A6DE;
+}
+
+#btn-transferir.fixed:not(.disabled){
+  position: fixed;
+  top:17%;
+  right: 17%;
+  font-size: 1.5em;
 }
 
 #local a,#local h2{

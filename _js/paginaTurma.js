@@ -236,6 +236,61 @@ $(document).on('click','.btn-cadDeficiencia',function(){
   },0);
 });
 
+function verificaCheckboxs(checkboxs){
+  var checados=0;
+  checkboxs.each(function(){
+    if($(this).prop("checked")==true){
+        checados=+1;
+    }
+   });
+   return checados;
+}
+
+function abilitaSelecao(){
+  var elements=$('.td-nome,.td-nomeusuario');
+  elements.css('cursor','pointer');
+  elements.off();
+  elements.click(function(){
+    var check=$(this).parent().find('.check-estudante');
+    if(check.prop("checked")==true){
+      check.prop("checked",false);
+      if(verificaCheckboxs($(".check-estudante"))==0){
+        $('#btn-transferir').addClass('disabled');
+        desabilitaSelecao();
+      }
+    }else{
+      check.prop("checked",true);
+    }
+  });
+}
+
+function desabilitaSelecao(){
+  var elements=$('.td-nome,.td-nomeusuario');
+  elements.css('cursor','auto');
+  elements.off();
+}
+
+$(document).on('click','.check-estudante',function(){
+  var checkboxs=$('.check-estudante');
+  checados=verificaCheckboxs(checkboxs);
+   if(checados){
+     $('#btn-transferir').removeClass("disabled");
+     abilitaSelecao();
+   }else{
+     $('#btn-transferir').addClass('disabled');
+     desabilitaSelecao();
+   }
+});
+
+$(document).on('scroll', function () {
+  var distanceToTop = $(window).scrollTop();
+  if(distanceToTop>150){
+    $("#btn-transferir").addClass("fixed");
+  }else{
+    $("#btn-transferir").removeClass("fixed");
+  }
+});
+
 $(document).on('blur','#formCadEstudante input#nome',function(){
   var texto = $('#formCadEstudante input#nome').val().split(' ');
   if(texto.length>=2){
