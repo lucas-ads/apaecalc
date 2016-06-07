@@ -259,8 +259,21 @@ div[id*="formCad"] select.select-deficiencia{
   font-size: 1.1em;
 }
 
-div[id*="formCad"] select#select-turmas{
+div[id*="formCad"] select#select-turmas,div#transferenciaEstudantes select#select-turmas{
   width: 46%;
+  font-size: 1.1em;
+}
+
+#turmaatual > h2{
+  font-size: 1.1em;
+  display: inline-block;
+}
+
+#estudantesSelecionados > h2{
+  font-size: 1em;
+}
+
+#estudantesSelecionados > label{
   font-size: 1.1em;
 }
 

@@ -1,3 +1,5 @@
+var estudantesSelecionados=[];
+
 //Função para exibir formularios
 function exibirForm(form, titulo, textobt1, textobt2,funcao1,funcao2,id){
     form.find('input:not([type="radio"])').val('');
@@ -23,8 +25,35 @@ function exibirForm(form, titulo, textobt1, textobt2,funcao1,funcao2,id){
     form.find('.foco div:first-child input').focus();
 }
 
+function povoarSelectsDeficiencias(data){
+  var deficiencias=data[0];
+  var selectDeficiencia=$('#select-deficiencia');
+  var edicaoselectDeficiencia=$('#edicaoselect-deficiencia');
+  var option="<option value='{{value}}'>{{nome}}</option>";
+  selectDeficiencia.append(option.replace('{{value}}',0).replace('{{nome}}','Selecione...'));
+  edicaoselectDeficiencia.append(option.replace('{{value}}',0).replace('{{nome}}','Selecione...'));
+  for(var i = 0; i<deficiencias.length;i+=1){
+    selectDeficiencia.append(option.replace('{{value}}',deficiencias[i][0]).replace('{{nome}}',deficiencias[i][1]));
+    edicaoselectDeficiencia.append(option.replace('{{value}}',deficiencias[i][0]).replace('{{nome}}',deficiencias[i][1]));
+  }
+}
+
+function povoarSelectsTurmas(data){
+  var turmas=data[1];
+  var turmaAtual=$('#cadastroEstudante #select-turmas').val();
+  var selectTurmas=$('#transferenciaEstudantes #select-turmas');
+  var option="<option value='{{value}}'>{{nome}}</option>";
+  selectTurmas.text('');
+  selectTurmas.append(option.replace('{{value}}',0).replace('{{nome}}','Selecione...'));
+  for(var i = 0; i<turmas.length;i+=1){
+    if(turmas[i][0]!=turmaAtual){
+        selectTurmas.append(option.replace('{{value}}',turmas[i][0]).replace('{{nome}}',turmas[i][1]));
+    }
+  }
+}
+
 //Função para carregar e exibir Turmas e Deficiências
-function carregarDeficiencias(){
+function carregarTurmasDeficiencias(funcaoPovoamento){
   //$('#testes').append("<p>Carregando turmas e deficiencias</p>");
   $('#select-deficiencia').html('');
   $.ajax({
@@ -34,17 +63,7 @@ function carregarDeficiencias(){
       tentativas: 0,
       success: function(data){
           //$('#testes').append(data);
-          //alert(data);
-          var deficiencias=data[0];
-          var selectDeficiencia=$('#select-deficiencia');
-          var edicaoselectDeficiencia=$('#edicaoselect-deficiencia');
-          var option="<option value='{{value}}'>{{nome}}</option>";
-          selectDeficiencia.append(option.replace('{{value}}',0).replace('{{nome}}','Selecione...'));
-          edicaoselectDeficiencia.append(option.replace('{{value}}',0).replace('{{nome}}','Selecione...'));
-          for(var i = 0; i<deficiencias.length;i+=1){
-            selectDeficiencia.append(option.replace('{{value}}',deficiencias[i][0]).replace('{{nome}}',deficiencias[i][1]));
-            edicaoselectDeficiencia.append(option.replace('{{value}}',deficiencias[i][0]).replace('{{nome}}',deficiencias[i][1]));
-          }
+          funcaoPovoamento(data);
       },
       error: function(data){
         //$('#testes').append('<br>error: '+this.tentativas);
@@ -81,7 +100,7 @@ function cadastrarItem(dados,output,url,funcaoSucesso,funcaoFalha){
               }
               output.css('color','red');
               if(data[0]=="deficiencia"){
-                carregarDeficiencias();
+                carregarTurmasDeficiencias(povoarSelectsDeficiencias);
               }else{
                 if(dados.operacao=="CADASTRAR"){
                   $('#'+data[0]).select();
@@ -92,12 +111,12 @@ function cadastrarItem(dados,output,url,funcaoSucesso,funcaoFalha){
             }
         },
         error: function(data){
-          //$('#testes').append('<br>error: '+this.tentativas);
+        //  $('#testes').append('<br>error: '+this.tentativas);
           this.tentativas+=1;
           if(this.tentativas<3){
             $.ajax(this);
           }else{
-            //$('#testes').append('<br>Conexão interrompida');
+          //  $('#testes').append('<br>Conexão interrompida');
           }
         }
     });
@@ -208,6 +227,34 @@ function editarEstudante(id){
   }
 }
 
+function transferirEstudante(){
+  var turmaDestino=$('#formTransferenciaEstudantes #select-turmas').val();
+  var output=$('#transferenciaEstudantes output');
+  if(turmaDestino!=0){
+    var dados={
+      estudantes: estudantesSelecionados,
+      turmadestino: turmaDestino
+    };
+    cadastrarItem(dados,output,'_include/TransferirEstudante.php',function(dadosEnviados,dadosRecebidos){
+      for(var i =0 ; i<estudantesSelecionados.length;i+=1){
+          $('#tableEstudantes tbody tr[value='+estudantesSelecionados[i]+']').remove();
+      }
+      $('#transferenciaEstudantes #bt1').text('Fechar');
+      var bt2=$('#transferenciaEstudantes #bt2');
+      bt2.text('OK');
+      bt2.off();
+      bt2.click(function(){
+        $('#transferenciaEstudantes').css('display','none');
+      });
+      $('#btn-transferir').addClass('disabled');
+      desabilitaSelecao();
+      estudantesSelecionados=[];
+    },null);
+  }else{
+    output.text("Preencha todos os campos marcados com (*)");
+  }
+}
+
 $('#btn-cadastrarEstudante').click(function(){
   exibirForm($('#cadastroEstudante'),'Cadastrar Estudante','Fechar','Cadastrar',null,cadastrarEstudante,0);
 });
@@ -216,6 +263,23 @@ $(document).on('click','.btn-editarestudante',function(){
   exibirForm($('#edicaoDadosGerais'),'Atualizar Informações','Cancelar','Salvar',null,editarEstudante,0);
   var id=parseInt($(this).parent().parent().attr('value'));
   povoarEdicaoEstudante(id);
+});
+
+$(document).on('click','#btn-transferir',function(){
+  exibirForm($('#transferenciaEstudantes'),'Transferir de Turma','Cancelar','Transferir',null,transferirEstudante,0);
+  var h2Estudantes = $('#estudantesSelecionados h2');
+  h2Estudantes.text('');
+  var estudantes=$('#tableEstudantes input[type="checkbox"]:checked').parent().parent();
+  estudantesSelecionados=[];
+  estudantes.each(function(index){
+    var nome=$(this).find('td.td-nome').text().split(" ");
+    h2Estudantes.append(nome[0]);
+    estudantesSelecionados.push(parseInt($(this).attr('value')));
+    if(index!=estudantes.length-1){
+      h2Estudantes.append(', ');
+    }
+  });
+  carregarTurmasDeficiencias(povoarSelectsTurmas);
 });
 
 $(document).on('click','.btn-cadDeficiencia',function(){
@@ -312,5 +376,5 @@ $(document).ready(function(){
     monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
     monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
   });
-  carregarDeficiencias();
+  carregarTurmasDeficiencias(povoarSelectsDeficiencias);
 });

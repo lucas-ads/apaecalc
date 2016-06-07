@@ -110,4 +110,59 @@
       desconectar($conexao);
       return $estudante;
     }
+
+    //Função criada para a realização da transfência do estudante para outra turma,
+    //ela é responsável por verificar se nenhum estudante já é da turma de destino
+    //(Erros que podem ser provocados por usuarios mal-intencionados),
+    //ao mesmo tempo que verifica também a existencia dos ids dos estudantes selecionados na página
+    //Retorna 1 para tudo OK, -1 para algum estudante inexistente, -2 para quando algum estudante já é da turma de destino
+    function verificarTurmasParaTransferencia($estudantes,$idTurma){
+      $conexao = conectar();
+
+      $subquery=$estudantes[0];
+      for($i=1;$i<count($estudantes);$i+=1){
+        $subquery=$subquery.', '.$estudantes[$i];
+      }
+
+      $resultset = mysqli_query($conexao,"select turma_atual from estudante where id in (".$subquery.");");
+
+      $resultado = [];
+      while($row=mysqli_fetch_assoc($resultset)){
+          $resultado[] = $row['turma_atual'];
+      }
+      desconectar($conexao);
+
+      if(count($resultado)!=count($estudantes)){
+        return -1;
+      }
+
+      for($i=0;$i<count($resultado);$i+=1){
+        if($resultado[$i]==$idTurma){
+          return -2;
+        }
+      }
+
+      return 1;
+    }
+
+    function transferirEstudantes($estudantes,$idTurma){
+      $conexao = conectar();
+
+      $partofquery=$estudantes[0];
+      for($i=1;$i<count($estudantes);$i+=1){
+        $partofquery=$partofquery.', '.$estudantes[$i];
+      }
+
+      mysqli_query($conexao,"update historico set data_saida=now() where id_estudante in (".$partofquery.") and data_saida is null;");
+
+      $sqlInserts="";
+      for($i=0;$i<count($estudantes);$i++){
+        $sqlInserts .= '('.$estudantes[$i].','.$idTurma.',now()),';
+      }
+
+      mysqli_query($conexao,"insert into historico (id_estudante, id_turma, data_entrada) values ".substr($sqlInserts,0,-1).';');
+
+      mysqli_query($conexao,"update estudante set turma_atual=".$idTurma." where id in (".$partofquery.");");
+      desconectar($conexao);
+    }
 ?>

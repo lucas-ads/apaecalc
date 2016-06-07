@@ -202,6 +202,30 @@
         </div>
     </div>
   </div>
+  <div id="transferenciaEstudantes" class="form">
+    <div class="foco">
+        <h1>Transferir de Turma</h1>
+        <div id="formTransferenciaEstudantes">
+          <div class="" id="estudantesSelecionados">
+            <label for="">Estudantes Selecionados:</label>
+            <h2></h2>
+          </div>
+          <div class="" id="turmaatual">
+            <label>Turma Atual:</label>
+            <h2><?php echo $turma['nome_turma']; ?></h2>
+          </div>
+          <div class="">
+            <label for="">*Turma de Destino:</label>
+            <select id="select-turmas">
+
+            </select>
+          </div>
+          <output> </output>
+          <button id="bt1">Cancelar</button>
+          <button id="bt2">Cadastrar</button>
+        </div>
+    </div>
+  </div>
   <script id="template-linhaestudante" type="text/template">
     <tr value="{{idestudante}}">
       <td><input type="checkbox"></td>
