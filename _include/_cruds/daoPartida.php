@@ -16,10 +16,10 @@
 
             if($id!=null){
                 if($rodada>0){
-                  $stmt=$conexao->prepare("insert into partida (operacao, etapa, carreira,rodada,embaralhado,id_historico) values(?,?,?,?,?,?)");
+                  $stmt=$conexao->prepare("insert into partida (operacao, etapa, carreira,rodada,embaralhado,id_historico,data_partida) values(?,?,?,?,?,?,now())");
                   $stmt->bind_param("iiiiii",$operacao,$etapa,$carreira,$rodada,$embaralhado,$id);
                 }else{
-                  $stmt=$conexao->prepare("insert into partida (operacao, etapa, carreira,embaralhado,id_historico) values(?,?,?,?,?)");
+                  $stmt=$conexao->prepare("insert into partida (operacao, etapa, carreira,embaralhado,id_historico,data_partida) values(?,?,?,?,?,now())");
                   $stmt->bind_param("iiiii",$operacao,$etapa,$carreira,$embaralhado,$id);
                 }
 

@@ -58,6 +58,9 @@
                         <button class="btn-editarturma btn-actionturma">
                           <img src="_imagens/icone-editar.png" alt="Editar"/>
                         </button>
+                        <button class="btn-actionturma" '.$disabled.'>
+                          <span class="icon-print"></span>
+                        </button>
                         <button class="btn-entrar btn-actionturma">
                           <span class="icon-right-open"></span>
                         </button>

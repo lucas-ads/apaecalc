@@ -78,7 +78,9 @@
                 </div>
             </div>
             <form id="formLogout" action="deslogarEstudante.php" method="post">
-                <button class="icon-logout foco"></button>
+                <button class="foco">
+                  <img src="_imagens/sair_2.png" alt="" />
+                </button>
             </form>
         </div>
         <div id="game">
@@ -93,7 +95,9 @@
                     <div class="side right"></div>
                 </div>
             </div>
-            <button class="foco icon-left-thin" id="voltarMenu"></button>
+            <button class="foco" id="voltarMenu">
+              <img src="_imagens/voltar.png" alt="" />
+            </button>
             <button class="foco" id="continue" disabled>Continuar</button>
         </div>
     </main>
