@@ -10,7 +10,7 @@
     $nome=$professor->get_name();
     $nomes=explode(" ",$nome);
     $doisnomes=(isset($nomes[0])?$nomes[0]:"")." ".(isset($nomes[1])?$nomes[1]:"");
-    $turmas=exibeDadosTurma();
+    $turmas=exibeDadosTurmas();
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +58,7 @@
                         <button class="btn-editarturma btn-actionturma">
                           <img src="_imagens/icone-editar.png" alt="Editar"/>
                         </button>
-                        <button class="btn-actionturma" '.$disabled.'>
+                        <button class="btn-actionturma btn-print">
                           <span class="icon-print"></span>
                         </button>
                         <button class="btn-entrar btn-actionturma">
@@ -180,6 +180,42 @@
           <button id="bt2">Cadastrar</button>
         </div>
     </div>
+  </div>
+  <div id="relatorioTurma" class="form">
+    <div class="foco">
+        <h1></h1>
+        <form target="_blank" method="GET" action="_include/RelatorioDeTurma.php" id="formRelatorioTurma">
+          <h2>Este relatorio deve conter:</h2>
+          <div class="">
+            <input type="checkbox" name="matriculasatuais" id="check-matriculasatuais" checked>
+            <label for="check-matriculasatuais">*os estudantes atualmente matriculados nesta turma</label>
+          </div>
+          <div class="">
+            <input type="checkbox" name="matriculasantigas" id="check-matriculasantigas">
+            <label for="check-matriculasantigas">*os estudantes que já passaram por esta turma</label>
+          </div>
+          <div class="">
+            <input type="checkbox" name="nomeusuario" id="check-nomeusuario">
+            <label for="check-nomeusuario">os nomes de usuário dos estudantes</label>
+          </div>
+          <div class="">
+            <input type="checkbox" name="datanascimento" id="check-datanascimento" checked>
+            <label for="check-datanascimento">as datas de nascimento dos estudantes</label>
+          </div>
+          <div class="">
+            <input type="checkbox" name="deficiencia" id="check-deficiencia">
+            <label for="check-deficiencia">a deficiência que cada estudante possui</label>
+          </div>
+          <div class="">
+            <input type="checkbox" name="datasmatriculas" id="check-datasmatriculas" checked>
+            <label for="check-datasmatriculas">as datas de entrada e saída da turma atual</label>
+          </div>
+          <input type="hidden" id="idturma" name="idturma">
+          <output> </output>
+          <button type="button" id="bt1">Cancelar</button>
+          <button id="bt2">Cadastrar</button>
+        </div>
+    </form>
   </div>
   <script id="template-linhaturma" type="text/template">
     <tr value="{{idturma}}">

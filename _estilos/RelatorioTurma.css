@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+*{
+  font-family: Arial;
+  font-family: sans-serif;
+}
+
+body{
+  -webkit-print-color-adjust: exact;
+}
+
+body > table{
+  margin: 0 auto;
+}
+
+table{
+  border-collapse: collapse;
+}
+
+table td, table th{
+  padding: 4px;
+}
+
+.titulo{
+  font-size: 1.4em;
+}
+
+#tableinterna{
+  border: none;
+}
+
+th{
+  text-transform: uppercase;
+  background-color: #ecf0f1;
+}
+
+.capitalize{
+  text-transform: capitalize;
+}
+
+thead th{
+    background-color: #bdc3c7;
+}
+
+thead{
+  background: #95a5a6;
+}
+
+@media print{
+  body{
+    font-size: 14px;
+  }
+
+  table table th{
+      font-size: 0.8rem;
+  }
+
+  thead{
+    display: table-row-group;
+  }
+}

@@ -83,11 +83,12 @@
       $idClass=intval($idClass);
       $conexao = conectar();
 
-      $resultset = mysqli_query($conexao,"select * from estudante where turma_atual=".$idClass." order by nome;");
+      $resultset = mysqli_query($conexao,"select estudante.*,deficiencia.nome_deficiencia from estudante inner join deficiencia on estudante.deficiencia=deficiencia.id where estudante.turma_atual=".$idClass." order by estudante.nome;");
 
       $resultado = [];
       while($row=mysqli_fetch_assoc($resultset)){
           $estudante = new Estudante($row['id'],$row['nome'],$row['nome_usuario'],$row['data_nascimento'],$row['observacao'],$row['operacao'],$row['etapa'],$row['rodada'],$row['embaralhar'],$row['deficiencia']);
+          $estudante->set_nomedeficiencia($row['nome_deficiencia']);
           $resultado[] = $estudante;
       }
 

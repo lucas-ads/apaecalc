@@ -211,6 +211,15 @@ div[id*="formCad"] input:not([type="radio"]), textarea,.radio-embaralhar{
   text-transform: none;
 }
 
+#relatorioTurma h2{
+  font-size: 1.3em;
+}
+
+#formRelatorioTurma > div{
+  margin-bottom: 1em;
+  text-align: left;
+}
+
 .form button{
     float: left;
     display: inline-block;

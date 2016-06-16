@@ -11,6 +11,7 @@ class Estudante {
     private $rodada;
     private $embaralhar;
     private $defiencia;
+    private $nomedeficiencia;
 
     public function Estudante($id,$nome,$nomeusuario,$datanascimento,$observacao,$operacao,$etapa,$rodada,$embaralhar,$deficiencia){
         $this->id=intval($id);
@@ -82,6 +83,14 @@ class Estudante {
 
     public function get_deficiencia(){
         return $this->deficiencia;
+    }
+
+    public function get_nomedeficiencia(){
+      return $this->nomedeficiencia;
+    }
+
+    public function set_nomedeficiencia($nome){
+      $this->nomedeficiencia=$nome;
     }
 
     public function get_nomeoperacao(){

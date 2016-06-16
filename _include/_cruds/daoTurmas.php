@@ -79,7 +79,21 @@
     return $result;
   }
 
-  function exibeDadosTurma(){
+  function exibeDadosTurma($id){
+    $id=intval($id);
+    $conexao=conectar();
+
+    $resultset = mysqli_query($conexao,"select turma.*, COUNT(historico.id_turma)-count(historico.data_saida) as quant, COUNT(historico.id_turma) as vinculo FROM turma LEFT OUTER JOIN historico ON turma.id=historico.id_turma where turma.id=".$id." GROUP BY turma.id order by turma.nome_turma;");
+    $turma=null;
+    if($row = mysqli_fetch_assoc($resultset)) {
+      $turma=$row;
+    }
+
+    desconectar($conexao);
+    return $turma;
+  }
+
+  function exibeDadosTurmas(){
     $conexao=conectar();
 
     $resultset = mysqli_query($conexao,"select turma.*, COUNT(historico.id_turma)-count(historico.data_saida) as quant, COUNT(historico.id_turma) as vinculo FROM turma LEFT OUTER JOIN historico ON turma.id=historico.id_turma GROUP BY turma.id order by turma.nome_turma;");
