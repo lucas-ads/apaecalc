@@ -61,6 +61,12 @@
                         <button class="btn-actionturma btn-print">
                           <span class="icon-print"></span>
                         </button>
+                        <form style="display: inline-block" method="GET" target="_blank" action="_include/RelatorioDeProgressoTurma.php">
+                          <button class="btn-actionturma">
+                            <input name="idturma" type="hidden" value="'.$turmas[$i][0].'">
+                            <span class="icon-chart-line"></span>
+                          </button>
+                        </form>
                         <button class="btn-entrar btn-actionturma">
                           <span class="icon-right-open"></span>
                         </button>

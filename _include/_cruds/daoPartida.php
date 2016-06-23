@@ -42,4 +42,20 @@
       }
       return -1;
     }
+
+    function getPartidasByEstudanteAndRodada($idEstudante,$rodada){
+      $idEstudante=intval($idEstudante);
+      $rodada=intval($rodada);
+      $conexao = conectar();
+
+      $resultset = mysqli_query($conexao,"select partida.*,historico.id_turma from partida inner join historico on partida.id_historico=historico.id where historico.id_estudante=".$idEstudante." and partida.rodada=".$rodada." and partida.vencida=1;");
+
+      $partida=null;
+      while($row=mysqli_fetch_assoc($resultset)){
+         $partida[]= $row;
+      }
+
+      desconectar($conexao);
+      return $partida;
+    }
 ?>
