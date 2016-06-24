@@ -6,7 +6,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="../_estilos/RelatorioTurma.css" media="all">
     <style>
-
       [class*='bar-level']{
         padding: 0;
         vertical-align: baseline;
@@ -21,29 +20,65 @@
       }
 
       .bar-level-12 div{
-        width: 8.33%;
+        width: 8.333%;
       }
 
       .bar-level-11 div{
         width: 9.09%;
       }
 
-      .bar-level-12 div:last-child{
-        width: 8.37%;
+      .zerou [class*='bar-level'],#color-jogo-zerado{
+        background: rgb(142, 202, 239);
       }
 
-      .bar-level-11 div:last-child{
-        width: 9.1%;
+      tbody tr td:last-child{
+        text-align: center;
+        font-weight: bold;
       }
 
-      [class*='bar-level'] div.strengh{
+      #tr-legenda td:last-child{
+        text-align: left;
+      }
+
+      #tr-legenda td:first-child{
+        text-align: center;
+        font-size: 1.5em;
+      }
+
+      .side-legenda{
+        font-weight: normal;
+        display: inline-block;
+        margin: 0 5%;
+      }
+
+      [class*='bar-level'] div.strengh,#color-fase-passada-embaralhado{
         background: #2980b9;
       }
 
-      [class*='bar-level'] div.destaturma{
+      [class*='bar-level'] div.destaturma,#color-fase-passada-nesta-turma{
         border-bottom: solid 3px #f39c12;
       }
 
+      .div-item-legenda div{
+        width: 1.5em;
+        height: 1em;
+      }
+
+      .div-item-legenda p{
+        margin: 0.3em 0;
+      }
+
+      .div-item-legenda *{
+        display: inline-block;
+      }
+
+      #color-fase-passada{
+        background: #2abb67;
+      }
+
+      @page{
+        size: landscape;
+      }
     </style>
 </head>
 <body>
@@ -91,7 +126,7 @@
             if(count($estudantes)>0){
               for($i=0;$i<count($estudantes);$i+=1){
                 $partidas=getPartidasByEstudanteAndRodada($estudantes[$i]->get_id(),$estudantes[$i]->get_rodada());
-                $table.="<tr><td>".$estudantes[$i]->get_nome()."</td>";
+                $table.="<tr ".($estudantes[$i]->get_rodada()>1?"class='zerou'":"")."><td>".$estudantes[$i]->get_nome()."</td>";
                 $indicePartida=0;
                 for($operacao=1;$operacao<=4;$operacao+=1){
                   $max=11;
@@ -121,38 +156,31 @@
             }else{
               $table.='<tr><td colspan="6">Não existem estudantes matriculados nesta turma!</td><tr>';
             }
-            /*if($atuais==1){
-              $estudantes=getEstudanteByClass($idturma);
-              $matriculas=getMatriculasVigentes($idturma);
-              $table.=str_replace('{{tiposestudantes}}','Estudantes Com Matriculas Vigentes',$subcabecalho);
-              if(count($estudantes)>0){
-                for($i=0;$i<count($estudantes);$i+=1){
-                  $table.=('<tr><td class="capitalize">'.$estudantes[$i]->get_nome().'</td>');
-                  $table.=($nomeusuario==1?'<td>'.$estudantes[$i]->get_nomeusuario().'</td>':"");
-                  $table.=($datanascimento==1?'<td>'.$estudantes[$i]->get_datanascimento().'</td>':"");
-                  $table.=($deficiencia==1?'<td>'.ucfirst(strtolower($estudantes[$i]->get_nomedeficiencia())).'</td>':"");
-                  $table.=($datasmatriculas==1?'<td>'.$matriculas[$i]['data_entrada'].'</td><td></td>':"");
-                  $table.='</tr>';
-                }
-              }else{
-                $table.='<tr><td colspan="'.$colunas.'">Não existem matrículas em vigência nesta turma!</td><tr>';
-              }
-            }
-            if($antigas==1){
-              $matriculas=getHistoricoTurma($idturma);
-              $table.=str_replace('{{tiposestudantes}}','Estudantes Transferidos de Turma',$subcabecalho);
-              if(count($matriculas)>0){
-                for($i=0;$i<count($matriculas);$i+=1){
-                  $table.=('<tr><td class="capitalize">'.$matriculas[$i]['nome'].'</td>');
-                  $table.=($nomeusuario==1?'<td>'.$matriculas[$i]['nome_usuario'].'</td>':"");
-                  $table.=($datanascimento==1?'<td>'.$matriculas[$i]['data_nascimento'].'</td>':"");
-                  $table.=($deficiencia==1?'<td>'.ucfirst(strtolower($matriculas[$i]['nome_deficiencia'])).'</td>':"");
-                  $table.=($datasmatriculas==1?'<td>'.$matriculas[$i]['data_entrada'].'</td><td>'.$matriculas[$i]['data_saida'].'</td>':"");
-                  $table.='</tr>';
-                }
-
-            }*/
-
+            $table.='<tr id="tr-legenda">
+              <td>Legenda</td>
+              <td colspan="5">
+                <div class="side-legenda">
+                    <div class="div-item-legenda">
+                      <div id="color-fase-passada"></div>
+                      <p>Fases passadas</p>
+                    </div>
+                    <div class="div-item-legenda">
+                      <div id="color-jogo-zerado"></div>
+                      <p>Jogo zerado</p>
+                    </div>
+                </div>
+                <div class="side-legenda">
+                    <div class="div-item-legenda">
+                      <div id="color-fase-passada-embaralhado"></div>
+                      <p>Fases passadas no modo embaralhado</p>
+                    </div>
+                    <div class="div-item-legenda">
+                      <div id="color-fase-passada-nesta-turma"></div>
+                      <p>Fases passadas estando nesta turma</p>
+                    </div>
+                </div>
+              </td>
+            </tr>';
             $table.='</body></table>';
 
             echo $table;
