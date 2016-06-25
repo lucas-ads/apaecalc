@@ -8,8 +8,8 @@
     <style>
       [class*='bar-level']{
         padding: 0;
-        vertical-align: baseline;
         width: 15%;
+        height: 26px;
       }
 
       [class*='bar-level'] div{
@@ -17,6 +17,13 @@
         display: inline-block;
         background: #2abb67;
         margin: 0;
+        float: left;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+
+      [class*='bar-level'] div:not(*:root) {
+        box-sizing: inherit;
       }
 
       .bar-level-12 div{
