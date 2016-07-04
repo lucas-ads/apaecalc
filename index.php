@@ -16,6 +16,7 @@
           if(isset($_SESSION['professor'])){
             header("location:Admin.php");
           }else{
+              session_unset();
               $place_username="";
               $username="";
               $password="";

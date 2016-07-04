@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../_estilos/RelatorioTurma.css" media="all">
+    <link rel="stylesheet" href="_estilos/RelatorioTurma.css" media="all">
     <style>
       [class*='bar-level']{
         padding: 0;
@@ -91,15 +91,30 @@
 <body>
 <?php
     session_start();
-    require_once "_cruds/daoTurmas.php";
-    require_once "_classes/Estudante.php";
-    require_once "_cruds/daoEstudante.php";
-    require_once "_cruds/daoHistorico.php";
-    require_once "_cruds/daoPartida.php";
+    require_once "_include/_cruds/daoTurmas.php";
+    require_once "_include/_classes/Estudante.php";
+    require_once "_include/_cruds/daoEstudante.php";
+    require_once "_include/_cruds/daoHistorico.php";
+    require_once "_include/_cruds/daoPartida.php";
 
     if(!isset($_SESSION['professor'])){
-        echo 'Erro ao salvar a partida, faça login novamente!';
+        echo '<p>Sessão expirada, faça login novamente!</p>
+              <form method="get" action="index.php">
+                <input type="submit" value="Fazer Login Novamente">
+              </form>';
     }else{
+        $inactive=900;
+        if(isset($_SESSION['timeout'])){
+          $session_life = time() - $_SESSION['timeout'];
+          if($session_life > $inactive){
+            session_destroy();
+            header("Location: deslogarProfessor.php");
+          }else{
+              $_SESSION['timeout'] = time();
+          }
+        }else{
+          $_SESSION['timeout'] = time();
+        }
         if(isset($_GET['idturma'])){
           $idturma=intval($_GET['idturma']);
 
@@ -191,16 +206,17 @@
             $table.='</body></table>';
 
             echo $table;
-
+            date_default_timezone_set('America/Sao_Paulo');
+            echo '<p>Emitido em '.date('d/m/Y').' às '.date('H:i A').' (Horário Oficial de Brasília)</p>';
           }else{
-              echo 'Erro!';
+              echo '<p>Erro! A turma não pôde ser encontrada!</p>
+                    <input type="submit" value="Fechar" onclick="window.close();">';
           }
         }else{
-          echo 'Erro!';
+          echo '<p>Erro! A turma não foi informada!</p>
+                <input type="submit" value="Fechar" onclick="window.close();">';
         }
     }
-    date_default_timezone_set('America/Sao_Paulo');
 ?>
-<p>Emitido em <?php echo date('d/m/Y').' às '.date('H:i A').' (Horário Oficial de Brasília)';?></p>
 </body>
 </html>

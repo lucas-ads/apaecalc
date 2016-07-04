@@ -6,6 +6,18 @@
   if(!isset($_SESSION['professor'])){
       header("Location:index.php");
   }else{
+    $inactive=900;
+    if(isset($_SESSION['timeout'])){
+      $session_life = time() - $_SESSION['timeout'];
+      if($session_life > $inactive){
+        session_destroy();
+        header("Location: deslogarProfessor.php");
+      }else{
+          $_SESSION['timeout'] = time();
+      }
+    }else{
+      $_SESSION['timeout'] = time();
+    }
     $professor=$_SESSION['professor'];
     $nome=$professor->get_name();
     $nomes=explode(" ",$nome);
@@ -61,7 +73,7 @@
                         <button class="btn-actionturma btn-print">
                           <span class="icon-print"></span>
                         </button>
-                        <form style="display: inline-block" method="GET" target="_blank" action="_include/RelatorioDeProgressoTurma.php">
+                        <form style="display: inline-block" method="GET" target="_blank" action="RelatorioDeProgressoTurma.php">
                           <button class="btn-actionturma">
                             <input name="idturma" type="hidden" value="'.$turmas[$i][0].'">
                             <span class="icon-chart-line"></span>
@@ -190,7 +202,7 @@
   <div id="relatorioTurma" class="form">
     <div class="foco">
         <h1></h1>
-        <form target="_blank" method="GET" action="_include/RelatorioDeTurma.php" id="formRelatorioTurma">
+        <form target="_blank" method="GET" action="RelatorioDeTurma.php" id="formRelatorioTurma">
           <h2>Este relatorio deve conter:</h2>
           <div class="">
             <input type="checkbox" name="matriculasatuais" id="check-matriculasatuais" checked>

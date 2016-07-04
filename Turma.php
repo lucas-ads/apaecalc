@@ -8,6 +8,19 @@
   if(!isset($_SESSION['professor'])){
       header("Location:index.php");
   }else{
+    $inactive=900;
+    if(isset($_SESSION['timeout'])){
+      $session_life = time() - $_SESSION['timeout'];
+      if($session_life > $inactive){
+        session_destroy();
+        header("Location: deslogarProfessor.php");
+      }else{
+          $_SESSION['timeout'] = time();
+      }
+    }else{
+      $_SESSION['timeout'] = time();
+    }
+
     if(isset($_GET['idturma'])){
       $professor=$_SESSION['professor'];
       $nome=$professor->get_twofirstname();
