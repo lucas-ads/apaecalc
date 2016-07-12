@@ -1,0 +1,197 @@
+/*############################ 0 - Configurações gerais da página ############################*/
+@charset "UTF-8";
+
+[class*="icon-"]:before {
+    font-family: 'entypo', sans-serif;
+}
+
+body{
+    font-size: 10px;
+    margin: 0;
+}
+
+body *{
+    font-family: Arial Black;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+.foco{
+    border: solid 4px black;
+    background-color: rgb(230,230,230);
+}
+
+.foco:disabled{
+    border: solid 4px gray;
+}
+
+/*############################ 1 - Cabecalho da página ############################*/
+header#cabecalho{
+    overflow: hidden;
+    text-align: center;
+    background-color: rgb(225,239,187);
+    margin: 0px;
+}
+
+header#cabecalho > img{
+    display: inline-block;
+    width: 11%;
+    margin: 5px;
+    overflow: hidden;
+}
+
+header#cabecalho > img#logoApae{
+    float: left;
+    margin-left: 1em;
+}
+
+header#cabecalho > img#logoIfms{
+    float: right;
+    margin-right: 1em;
+}
+
+header#cabecalho h1{
+    display: inline-block;
+    max-width: 60%;
+    font-size: 2.8em;
+}
+
+/*############################ 1 - Corpo da página ############################*/
+
+#info-estudante{
+  margin: 2em auto;
+  padding: 0;
+  text-align: center;
+  border: solid 1px blue;
+  overflow: hidden;
+}
+
+#info-estudante *{
+  box-sizing: border-box;
+  text-align: left;
+}
+
+[id*="info-basicas"]{
+  display: inline-block;
+  border: solid 1px blue;
+  overflow: hidden;
+}
+
+#info-basicas1{
+  width: 20%;
+}
+
+#nome-estudante{
+  width: 100%;
+  font-size: 2.5em;
+}
+
+#info-basicas2{
+  border-left: solid 2px black;
+  border-right: solid 2px black;
+  padding: 0 1.5em;
+  font-size: 1.5em;
+  margin: 0 1.5em 0 0;
+}
+
+#info-basicas3{
+  max-width: 300px;
+  font-size: 1.5em;
+}
+
+#historicos{
+  list-style: none;
+  display: inline-block;
+  padding-left: 4em;
+}
+
+#historicos li{
+  width: 100%;
+  font-size: 1.2em;
+}
+
+#historicos li h1 *{
+  display: inline;
+  font-size: 1em;
+}
+
+#historicos li h1{
+  margin: 0.3em 0;
+}
+
+.btn-open-historico:hover{
+  background: rgb(190,190,190);
+}
+
+.btn-open-historico{
+  margin-right: 0.5em;
+  border: none;
+  background: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  text-align: center;
+  float: left;
+  display: block;
+  width: 2.5em;
+  height: 1.4em;
+}
+
+table{
+  border-collapse: collapse;
+  margin-left: 5em;
+  font-size: 1.3em;
+}
+
+table thead{
+  background-color: rgb(225,239,187);
+  font-size: 1.2em;
+}
+
+table td, table th{
+  padding: 0.5em 0.8em;
+}
+
+table tbody tr.partida:nth-child(odd){
+  background-color: rgb(235,235,235);
+}
+
+table tbody tr.partida:nth-child(even){
+  background-color: rgb(220,220,220);
+}
+
+.partida *{
+  text-align: center;
+}
+
+tr.data{
+  background-color: rgb(193, 200, 255);
+}
+
+span.icon-check{
+  color: green;
+}
+
+span.icon-cancel{
+  color: red;
+}
+
+[id*="open-historico-"]{
+  display: none;
+}
+
+table{
+  overflow: hidden;
+  display: block;
+  height: 0px;
+}
+
+[id*="open-historico-"]:checked ~ table{
+  height: auto;
+}
+
+[id*="open-historico-"]:checked ~ h1 label span:before{
+  font-family: entypo;
+  content: "\e75c";
+}

@@ -155,6 +155,9 @@ main{
   width: 70%;
 }
 
+.btn-detalhesestudante span{
+  font-size: 2em;
+}
 
 #turma{
   display: none;

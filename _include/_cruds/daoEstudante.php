@@ -11,7 +11,7 @@
         if($resultset->num_rows>0){
             $resultado=mysqli_fetch_assoc($resultset);
             if($resultado['senha']==md5($password)){
-                $estudante = new Estudante($resultado['id'],$resultado['nome'],$resultado['nome_usuario'],$resultado['datanascimento'],$resultado['observacao'],$resultado['operacao'],$resultado['etapa'],$resultado['rodada'],$resultado['embaralhar'],$resultado['deficiencia']);
+                $estudante = new Estudante($resultado['id'],$resultado['nome'],$resultado['nome_usuario'],$resultado['datanascimento'],$resultado['observacao'],$resultado['operacao'],$resultado['etapa'],$resultado['rodada'],$resultado['embaralhar'],$resultado['deficiencia'],$resultado['turma_atual']);
                 $resultado = $estudante;
             }else{
                 $resultado= -1;
@@ -87,7 +87,7 @@
 
       $resultado = [];
       while($row=mysqli_fetch_assoc($resultset)){
-          $estudante = new Estudante($row['id'],$row['nome'],$row['nome_usuario'],$row['data_nascimento'],$row['observacao'],$row['operacao'],$row['etapa'],$row['rodada'],$row['embaralhar'],$row['deficiencia']);
+          $estudante = new Estudante($row['id'],$row['nome'],$row['nome_usuario'],$row['data_nascimento'],$row['observacao'],$row['operacao'],$row['etapa'],$row['rodada'],$row['embaralhar'],$row['deficiencia'],$row['turma_atual']);
           $estudante->set_nomedeficiencia($row['nome_deficiencia']);
           $resultado[] = $estudante;
       }
@@ -100,10 +100,11 @@
       $idEstudante=intval($idEstudante);
       $conexao = conectar();
 
-      $resultset = mysqli_query($conexao,"select * from estudante where id=".$idEstudante.";");
+      $resultset = mysqli_query($conexao,"select estudante.*,deficiencia.nome_deficiencia from estudante inner join deficiencia on estudante.deficiencia=deficiencia.id where estudante.id=".$idEstudante.";");
 
       if($row=mysqli_fetch_assoc($resultset)){
-        $estudante = new Estudante($row['id'],$row['nome'],$row['nome_usuario'],$row['data_nascimento'],$row['observacao'],$row['operacao'],$row['etapa'],$row['rodada'],$row['embaralhar'],$row['deficiencia']);
+        $estudante = new Estudante($row['id'],$row['nome'],$row['nome_usuario'],$row['data_nascimento'],$row['observacao'],$row['operacao'],$row['etapa'],$row['rodada'],$row['embaralhar'],$row['deficiencia'],$row['turma_atual']);
+        $estudante->set_nomedeficiencia($row['nome_deficiencia']);
       }else{
         $estudante=null;
       }

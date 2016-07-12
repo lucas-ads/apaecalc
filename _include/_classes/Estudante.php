@@ -12,8 +12,9 @@ class Estudante {
     private $embaralhar;
     private $defiencia;
     private $nomedeficiencia;
+    private $turmaatual;
 
-    public function Estudante($id,$nome,$nomeusuario,$datanascimento,$observacao,$operacao,$etapa,$rodada,$embaralhar,$deficiencia){
+    public function Estudante($id,$nome,$nomeusuario,$datanascimento,$observacao,$operacao,$etapa,$rodada,$embaralhar,$deficiencia,$turmaatual){
         $this->id=intval($id);
         $this->nome=$nome;
         $this->nomeusuario=$nomeusuario;
@@ -24,6 +25,7 @@ class Estudante {
         $this->rodada=intval($rodada);
         $this->embaralhar=$embaralhar;
         $this->deficiencia=$deficiencia;
+        $this->turmaatual=$turmaatual;
     }
 
     public function get_id(){
@@ -79,6 +81,10 @@ class Estudante {
 
     public function get_embaralhar(){
         return $this->embaralhar;
+    }
+
+    public function get_turmaatual(){
+        return $this->turmaatual;
     }
 
     public function get_deficiencia(){

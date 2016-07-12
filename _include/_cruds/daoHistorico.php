@@ -32,4 +32,22 @@
       desconectar($conexao);
       return $matriculas;
     }
+
+    function getHistoricoEstudante($idestudante){
+      $conexao=conectar();
+      $resultset = mysqli_query($conexao,"select historico.*,turma.nome_turma from historico inner join turma on historico.id_turma=turma.id where id_estudante=".$idestudante.";");
+      $historico=[];
+      while($row = mysqli_fetch_assoc($resultset)) {
+        $data=explode('-',$row['data_entrada']);
+        $row['data_entrada']=$data[2].'/'.$data[1].'/'.$data[0];
+        if($row['data_saida']!=""){
+          $data=explode('-',$row['data_saida']);
+          $row['data_saida']=$data[2].'/'.$data[1].'/'.$data[0];
+        }
+        $historico[]=$row;
+      }
+
+      desconectar($conexao);
+      return $historico;
+    }
 ?>

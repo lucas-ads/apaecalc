@@ -58,4 +58,22 @@
       desconectar($conexao);
       return $partida;
     }
+
+    function getPartidasByHistorico($idHistorico){
+      $idEstudante=intval($idHistorico);
+      $conexao = conectar();
+
+      $resultset = mysqli_query($conexao,"select partida.* from partida where id_historico=".$idHistorico.";");
+
+      $partida=null;
+      while($row=mysqli_fetch_assoc($resultset)){
+        $datapartida=explode("-",$row["data_partida"]);
+        $row["data_partida"]=$datapartida[2]."/".$datapartida[1]."/".$datapartida[0];
+        $partida[]= $row;
+      }
+
+      desconectar($conexao);
+      return $partida;
+    }
+
 ?>

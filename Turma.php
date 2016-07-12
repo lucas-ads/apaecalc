@@ -71,6 +71,12 @@
                       <td class="td-nomeusuario">'.$estudantes[$i]->get_nomeusuario().'</td>
                       <td class="td-datanascimento">'.$estudantes[$i]->get_datanascimento().'</td>
                       <td>
+                      <form style="display: inline-block" method="GET" target="_blank" action="RelatorioCompletoEstudante.php">
+                        <button class="btn-detalhesestudante btn-actionestudante">
+                          <input name="idestudante" type="hidden" value="'.$estudantes[$i]->get_id().'">
+                          <span class="icon-vcard"></span>
+                        </button>
+                      </form>
                       <button class="btn-editarestudante btn-actionestudante">
                         <img src="_imagens/icone-editar.png" alt="Editar"/>
                       </button>
