@@ -1,3 +1,44 @@
+<?php
+  function getNomeOperacao($code){
+    $code=intval($code);
+    if($code==1)
+      return "Adição";
+    if($code==2)
+      return "Subtração";
+    if($code==3)
+      return "Multiplicação";
+    if($code==4)
+      return "Divisão";
+  }
+
+  require_once "_include/_cruds/daoTurmas.php";
+  require_once "_include/_classes/Estudante.php";
+  require_once "_include/_cruds/daoEstudante.php";
+  require_once "_include/_cruds/daoHistorico.php";
+  require_once "_include/_cruds/daoPartida.php";
+  require_once "_include/_classes/Teacher.php";
+  session_start();
+
+  if(!isset($_SESSION['professor'])){
+      header("Location:index.php");
+  }else{
+    $inactive=900;
+    if(isset($_SESSION['timeout'])){
+      $session_life = time() - $_SESSION['timeout'];
+      if($session_life > $inactive){
+        session_destroy();
+        header("Location: deslogarProfessor.php");
+      }else{
+          $_SESSION['timeout'] = time();
+      }
+    }else{
+      $_SESSION['timeout'] = time();
+    }
+
+    $professor=$_SESSION['professor'];
+    $nome=$professor->get_twofirstname();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,65 +51,28 @@
 <body>
   <header id="cabecalho">
       <img src="_imagens/logo_apae.png" id="logoApae" alt="Logo Apae" />
-      <h1><?php
-      function getNomeOperacao($code){
-        $code=intval($code);
-        if($code==1)
-          return "Adição";
-        if($code==2)
-          return "Subtração";
-        if($code==3)
-          return "Multiplicação";
-        if($code==4)
-          return "Divisão";
-      }
-
-      require_once "_include/_cruds/daoTurmas.php";
-      require_once "_include/_classes/Estudante.php";
-      require_once "_include/_cruds/daoEstudante.php";
-      require_once "_include/_cruds/daoHistorico.php";
-      require_once "_include/_cruds/daoPartida.php";
-      require_once "_include/_classes/Teacher.php";
-      session_start();
-      $professor=$_SESSION['professor'];
-      $nome=$professor->get_twofirstname();
-      echo $nome;
-      ?></h1>
+      <h1><?php echo $nome; ?></h1>
       <img src="_imagens/logo_ifms.png" id="logoIfms" alt="Logo IFMS">
   </header>
   <main>
     <?php
-        if(!isset($_SESSION['professor'])){
-          echo '<p>Sessão expirada, faça login novamente!</p>
-                <form method="get" action="index.php">
-                  <input type="submit" value="Fazer Login Novamente">
-                </form>';
-        }else{
-            $inactive=900;
-            if(isset($_SESSION['timeout'])){
-              $session_life = time() - $_SESSION['timeout'];
-              if($session_life > $inactive){
-                session_destroy();
-                header("Location: deslogarProfessor.php");
-              }else{
-                  $_SESSION['timeout'] = time();
-              }
-            }else{
-              $_SESSION['timeout'] = time();
-            }
             if(isset($_GET['idestudante'])){
               $idestudante=intval($_GET['idestudante']);
               $historico=getHistoricoEstudante($idestudante);
               if($historico!=null){
                 $estudante=getEstudanteById($idestudante);
-                echo "<section id='info-estudante'>";
-                  echo "<div id='info-basicas1'><h1 id='nome-estudante'>".$estudante->get_nome()."</h1></div>";
-                  echo "<div id='info-basicas2'><p>Nome de Usuário: ".$estudante->get_nomeusuario()."</p>";
-                  echo "<p>Data de Nascimento: ".$estudante->get_datanascimento()."</p>";
+                echo "<section id='info-estudante'><table>";
+                  echo "<tr><td rowspan='3' id='nome-estudante'>".$estudante->get_nome()."</td>";
+                  echo "<td class='col2'>Nome de Usuário: ".$estudante->get_nomeusuario()."</td>";
+                  echo "<td class='col3 deficiencia' rowspan='2'>Deficiência: ".$estudante->get_nomedeficiencia()."</td></tr>";
+                  echo "<tr><td class='col2'>Data de Nascimento: ".$estudante->get_datanascimento()."</td></tr>";
                   $turma=carregaTurma($estudante->get_turmaatual());
-                  echo "<p>Turma Atual: ".$turma["nome_turma"]."</p></div>";
-                  echo "<div id='info-basicas3'><p>Deficiência: ".$estudante->get_nomedeficiencia()."</p></div>";
-                echo "</section><ol id='historicos'>";
+                  echo "<tr><td class='col2'>Turma Atual: ".$turma["nome_turma"]."</td><td class='col3'>Modo de Jogo: ".($estudante->get_embaralhar()==1?"Embaralhado":"Normal")."</td></tr>";
+                  $obs=$estudante->get_observacao();
+                  if($obs!=""){
+                    echo "<tr><td class='observacao' colspan='3'>Observação: ".$obs."</td></tr>";
+                  }
+                echo "</table></section><ol id='historicos'>";
                   for($i=0;$i<count($historico);$i+=1){
                     $partidas=getPartidasByHistorico($historico[$i]["id"]);
                     $line = "<li>
@@ -125,7 +129,13 @@
                                     <td>".($partidas[$j]["embaralhado"]?"Sim":"Não")."</td>
                                     <td>".$tempo."</td>
                                     <td><span class=".$icon.">".$conteudo."</span></td>
-                                    <td class='btn-open-historico'><span class='icon-level-down'></span></td>
+                                    <td>
+                                      <form style='display: inline-block' method='GET' target='_blank' action='RelatorioCompletoPartida.php'>
+                                        <input type='hidden' name='idpartida' value='".$partidas[$j]['id']."'>
+                                        <input type='hidden' name='idestudante' value='".$idestudante."'>
+                                        <button class='btn-open-historico btn-open-partida'><span class='icon-level-down'></span></button>
+                                      </form>
+                                    </td>
                                   </tr>";
                               }
                               $line.="<tbody></table></li>";

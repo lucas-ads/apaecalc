@@ -76,4 +76,20 @@
       return $partida;
     }
 
+    function getPartidaById($idPartida){
+      $idPartida=intval($idPartida);
+      $conexao = conectar();
+
+      $resultset = mysqli_query($conexao,"select * from partida where id=".$idPartida.";");
+
+      if($row=mysqli_fetch_assoc($resultset)){
+        $datapartida=explode("-",$row["data_partida"]);
+        $row["data_partida"]=$datapartida[2]."/".$datapartida[1]."/".$datapartida[0];
+      }else{
+        $row=null;
+      }
+
+      desconectar($conexao);
+      return $row;
+    }
 ?>

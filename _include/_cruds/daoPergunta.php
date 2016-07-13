@@ -29,4 +29,16 @@
         return -1;
 
     }
+
+    function getPerguntasRespostas($idpartida){
+      $conexao=conectar();
+      $resultset = mysqli_query($conexao,"select pergunta.*, valor_resposta, correta, tempo_gasto from pergunta left join resposta on resposta.id_pergunta=pergunta.id where pergunta.id_partida =".$idpartida.";");
+      $perguntas=[];
+      while($row = mysqli_fetch_assoc($resultset)) {
+        $perguntas[]=$row;
+      }
+
+      desconectar($conexao);
+      return $perguntas;
+    }
 ?>

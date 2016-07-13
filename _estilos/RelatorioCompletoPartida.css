@@ -99,91 +99,36 @@ section table td{
   border-top: solid 2px black;
 }
 
-#historicos{
-  list-style: none;
-  display: inline-block;
-  width: 100%;
-  padding-left: 0;
-}
-
-#historicos li{
-  width: 100%;
-  font-size: 1.2em;
-}
-
-#historicos li h1 *{
-  display: inline;
-  font-size: 1em;
-}
-
-#historicos li h1{
-  margin: 0.3em 0;
-  margin-left: 5%;
-}
-
-.btn-open-historico:hover{
-  background: rgb(190,190,190);
-}
-
-.btn-open-historico{
-  margin-right: 0.5em;
-  border: none;
-  background: none;
-  border-radius: 0.5em;
-  cursor: pointer;
-  text-align: center;
-  float: left;
-  display: block;
-  width: 2.5em;
-  height: 1.4em;
-}
-
-form{
-  margin: 0;
-  padding: 0;
-}
-
-.partida td:last-child{
-  padding: 0.2em;
-}
-
-.btn-open-partida{
-  width: 3em;
-  height: 2em;
-  font-size: 1em;
-}
-
-li table{
+#tablerespostas{
   border-collapse: collapse;
   margin: 0 auto;
-  font-size: 1.3em;
-  display: none;
+  font-size: 1.7em;
   overflow: hidden;
 }
 
-li table thead{
+#tablerespostas td, #tablerespostas th{
+  padding: 0.5em 0.8em;
+}
+
+#tablerespostas thead{
   background-color: rgb(225,239,187);
   font-size: 1.2em;
 }
 
-li table td, li table th{
-  padding: 0.5em 0.8em;
-}
-
-li table tbody tr.partida:nth-child(odd){
-  background-color: rgb(235,235,235);
-}
-
-li table tbody tr.partida:nth-child(even){
+#tablerespostas .color0{
   background-color: rgb(220,220,220);
 }
 
-.partida *{
-  text-align: center;
+#tablerespostas .color1{
+  background-color: rgb(235,235,235);
 }
 
-li tr.data{
-  background-color: rgb(193, 200, 255);
+#tablerespostas .tdpergunta{
+  background-color: rgba(0,0,0,0.05);
+}
+
+#tablerespostas td{
+  text-align: center;
 }
 
 span.icon-check{
@@ -192,17 +137,4 @@ span.icon-check{
 
 span.icon-cancel{
   color: red;
-}
-
-[id*="open-historico-"]{
-  display: none;
-}
-
-[id*="open-historico-"]:checked ~ table{
-  display: table;
-}
-
-[id*="open-historico-"]:checked ~ h1 label span:before{
-  font-family: entypo;
-  content: "\e75c";
 }
