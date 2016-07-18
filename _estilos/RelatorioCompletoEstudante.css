@@ -206,3 +206,19 @@ span.icon-cancel{
   font-family: entypo;
   content: "\e75c";
 }
+
+.empty{
+  background-color: rgb(220,220,220);
+}
+
+.dadosemissao{
+  font-size: 1.5em;
+  margin-left: 10%;
+  display: none;
+}
+
+@media print{
+  .dadosemissao{
+    display: inline-block;
+  }
+}

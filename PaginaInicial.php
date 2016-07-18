@@ -84,20 +84,22 @@
             </form>
         </div>
         <div id="game">
-            <h1 id="titlefase">
-                <span id="caption" value="1"></span>:
-                <span id="stage" value="1"></span>
-            </h1>
-            <button id="btResetar" class="icon-cw foco"></button>
+            <div id="controleGame">
+                <button class="foco" id="voltarMenu">
+                  <img src="_imagens/voltar.png" alt="" />
+                </button>
+                <h1 id="titlefase">
+                    <span id="caption" value="1"></span>:
+                    <span id="stage" value="1"></span>
+                </h1>
+                <button id="btResetar" class="icon-cw foco"></button>
+            </div>
             <div id="container" class="foco">
                 <div>
                     <div class="side left"></div>
                     <div class="side right"></div>
                 </div>
             </div>
-            <button class="foco" id="voltarMenu">
-              <img src="_imagens/voltar.png" alt="" />
-            </button>
             <button class="foco" id="continue" disabled>Continuar</button>
         </div>
     </main>

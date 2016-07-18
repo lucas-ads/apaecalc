@@ -82,7 +82,7 @@ main{
 
 #btn-transferir{
   float: right;
-  margin-right: 15%;
+  margin-right: 5%;
   margin-top: 1em;
   background: gray;
   color: white;
@@ -299,7 +299,7 @@ div[id*="formCad"] select#select-turmas,div#transferenciaEstudantes select#selec
   }
 
   #tableEstudantes{
-    font-size: 1.2em;
+    font-size: 0.8em;
   }
 }
 
@@ -323,18 +323,22 @@ div[id*="formCad"] select#select-turmas,div#transferenciaEstudantes select#selec
     }
 
     #tableEstudantes{
-      font-size: 1.4em;
+      font-size: 1em;
     }
 }
 
 @media only screen and (min-width: 1020px){
   #tableEstudantes{
-    font-size: 1.3em;
+    font-size: 1.2em;
   }
 }
 
 @media only screen and (min-width: 1275px){
     header#cabecalho h1{
         margin: 0.4em auto;
+    }
+
+    #btn-transferir{
+      margin-right: 15%;
     }
 }

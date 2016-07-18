@@ -63,7 +63,7 @@ main{
     display: block;
     padding: 0px;
     text-align: center;
-    margin-top: 2em;
+    margin-top: 1.5em;
 }
 
 /*######################### 2.1 - Estilização do Menu de Modos de Jogo #######################################*/
@@ -136,9 +136,9 @@ div#home button.icon-logout{
     display: none;
 }
 
-#game > h1#titlefase{
+#controleGame h1#titlefase{
     margin: 0 auto;
-    font-size: 2em;
+    font-size: 1.5em;
     display: inline-block;
 }
 
@@ -207,11 +207,21 @@ div#home button.icon-logout{
 /*############################ 2.2.2 - Estilização dos botões inferiores ############################*/
 
 #game #voltarMenu{
-    font-size: 2em;
-    float: left;
     margin-left: 8%;
-    width: 17%;
+    float: left;
+    width: 10%;
     cursor: pointer;
+    overflow: hidden;
+    padding: 0;
+}
+
+#voltarMenu img{
+  width: 90%;
+}
+
+#controleGame{
+  width: 100%;
+  overflow: hidden;
 }
 
 #game #continue, #game #nextstage{
@@ -377,20 +387,19 @@ div#home button.icon-logout{
     }
 
     #game #voltarMenu{
-        width: 15%;
+        width: 8%;
     }
 
-    #game > h1#titlefase{
-        margin-left: 2.8em;
-        font-size: 3em;
+    #voltarMenu img{
+        width: 80%;
+    }
+
+    #game h1#titlefase{
+        font-size: 3.5em;
     }
 
     #game button#btResetar{
         font-size: 3em;
-    }
-
-    #game #continue, #game #nextstage{
-        margin-right: 23%;
     }
 }
 

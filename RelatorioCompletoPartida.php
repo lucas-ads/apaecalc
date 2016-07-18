@@ -136,7 +136,7 @@
                   echo $line;
                 echo "</tbody></table>";
                 date_default_timezone_set('America/Sao_Paulo');
-                echo '<p>Emitido em '.date('d/m/Y').' às '.date('H:i A').' (Horário Oficial de Brasília)</p>';
+                echo '<p class="dadosemissao">Emitido em '.date('d/m/Y').' às '.date('H:i A').' (Horário Oficial de Brasília)</p>';
 
               }else{
                 echo '<p>Erro! O estudante e/ou a partida não poderam ser encontrados!</p>

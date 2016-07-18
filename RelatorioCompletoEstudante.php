@@ -140,7 +140,7 @@
                               }
                               $line.="<tbody></table></li>";
                             }else{
-                              $line.="<tbody></table></li>";
+                              $line.="<tr  class='empty'><td colspan='7'>Nenhuma partida jogada até o momento!</td></tr><tbody></table></li>";
                             }
 
                           echo $line;
@@ -148,7 +148,7 @@
                 echo "</ol>";
 
                 date_default_timezone_set('America/Sao_Paulo');
-                echo '<p>Emitido em '.date('d/m/Y').' às '.date('H:i A').' (Horário Oficial de Brasília)</p>';
+                echo '<p class="dadosemissao">Emitido em '.date('d/m/Y').' às '.date('H:i A').' (Horário Oficial de Brasília)</p>';
 
               }else{
                 echo '<p>Erro! O estudante não pôde ser encontrado!</p>

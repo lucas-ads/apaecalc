@@ -138,3 +138,15 @@ span.icon-check{
 span.icon-cancel{
   color: red;
 }
+
+.dadosemissao{
+  font-size: 1.5em;
+  margin-left: 10%;
+  display: none;
+}
+
+@media print{
+  .dadosemissao{
+    display: inline-block;
+  }
+}
