@@ -60,7 +60,7 @@
                     <div id="formModoLivre">
                         <div id="selectsModoLivre">
                             <select name="operacao" id="operacao">
-                                <option value="1">Soma</option>
+                                <option value="1">Adição</option>
                                 <option value="2">Subtração</option>
                                 <option value="3">Multiplicação</option>
                                 <option value="4">Divisão</option>

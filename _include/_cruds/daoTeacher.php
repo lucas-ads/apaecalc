@@ -24,6 +24,17 @@
         return $resultado;
     }
 
+    function insereProfessor($nome,$nomeusuario,$senha){
+      $senha=normalizarAspas($senha);
+      $conexao=conectar();
+      $stmt=$conexao->prepare("insert into professor (nome,nome_usuario,senha) values(?,?,md5(?));");
+      $stmt->bind_param("sss",$nome,$nomeusuario,$senha);
+      $stmt->execute();
+      $id = $conexao->insert_id;
+      desconectar($conexao);
+      return $id;
+    }
+
     function verificaNomeUsuarioProfessor($username){
       $conexao=conectar();
       $resultset = mysqli_query($conexao,"select count(*) from professor where nome_usuario='".$username."';");

@@ -189,6 +189,10 @@ div[id*="formCad"] input:not([type="radio"]), textarea,.radio-embaralhar{
   display: inline-block;
 }
 
+#formCadAdministrador input{
+  width: 50%;
+}
+
 .radio-embaralhar{
   text-align: left;
 }
@@ -207,7 +211,7 @@ div[id*="formCad"] input:not([type="radio"]), textarea,.radio-embaralhar{
   vertical-align: super;
 }
 
-#cadastroEstudante #nomeusuario{
+#cadastroEstudante #nomeusuario, #nomeusuario-admin{
   text-transform: none;
 }
 

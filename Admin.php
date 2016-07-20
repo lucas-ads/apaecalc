@@ -95,6 +95,7 @@
           <button type="submit">Sair</button>
       </form>
       <button id="btn-cadastrarEstudante">Cadastrar Estudante</button>
+      <button id="btn-cadastrarAdministrador">Cadastrar Admintrador</button>
       <button class="btn-cadastrarTurma">Cadastrar Turma</button>
   </main>
   <div id="testes">
@@ -150,6 +151,32 @@
             <div class="">
               <label for="confirm-password">*Confirme a senha:</label>
               <input type="password" id="confirm-password" placeholder="Repita a senha">
+            </div>
+            <output> </output>
+            <button id="bt1">Cancelar</button>
+            <button id="bt2">Cadastrar</button>
+          </div>
+      </div>
+  </div>
+  <div id="cadastroAdministrador" class="form">
+      <div class="foco">
+          <h1>Cadastrar Administrador</h1>
+          <div id="formCadAdministrador">
+            <div class="">
+              <label for="nome-admin">*Nome:</label>
+              <input type="text" id="nome-admin" placeholder="Ex. João da Silva">
+            </div>
+            <div class="">
+              <label for="nomeusuario-admin">*Nome de Usuário:</label>
+              <input type="text" id="nomeusuario-admin" placeholder="Ex. joao-silva">
+            </div>
+            <div class="">
+              <label for="password-admin">*Senha:</label>
+              <input type="password" id="password-admin" placeholder="Mínimo: 6 caracteres">
+            </div>
+            <div class="">
+              <label for="confirm-password-admin">*Confirme a senha:</label>
+              <input type="password" id="confirm-password-admin" placeholder="Repita a senha">
             </div>
             <output> </output>
             <button id="bt1">Cancelar</button>

@@ -170,6 +170,29 @@ $(document).on('click','.btn-cadastrarTurma',function(){
   exibirForm($('#cadastroTurma'),'Cadastrar Turma','Fechar','Cadastrar',null,cadastrarEditarTurma,0);
 });
 
+function cadastrarAdministrador(id){
+  var output=$('#cadastroAdministrador output');
+  var dados={
+    operacao:"CADASTRAR",
+    nomeusuario:$('#nomeusuario-admin').val(),
+    nome:$('#nome-admin').val(),
+    senha: $('#password-admin').val(),
+    confirmasenha: $('#confirm-password-admin').val(),
+  };
+  if(dados.nomeusuario!=""&&dados.nome!=""&&dados.senha!=""&&dados.confirmasenha!=""){
+    cadastrarItem(dados,output,'_include/cadastrarAdministrador.php',function(dadosEnviados,dadosRecebidos){
+      $('#formCadAdministrador').find('#nome-admin,#nomeusuario-admin,#password-admin,#confirm-password-admin').val('');
+      $('#formCadAdministrador #nome-admin').focus();
+    },null);
+  }else{
+    output.text("Preencha todos os campos marcados com (*)");
+  }
+}
+
+$(document).on('click','#btn-cadastrarAdministrador',function(){
+  exibirForm($('#cadastroAdministrador'),'Cadastrar Administrador','Fechar','Cadastrar',null,cadastrarAdministrador,0);
+});
+
 $(document).on('click','.btn-editarturma',function(){
   var id=parseInt($(this).parent().parent().attr('value'));
   exibirForm($('#cadastroTurma'),'Editar Turma','Fechar','Salvar',null,cadastrarEditarTurma,id);
@@ -244,6 +267,13 @@ $(document).on('blur','#formCadEstudante input#nome',function(){
   var texto = $('#formCadEstudante input#nome').val().split(' ');
   if(texto.length>=2){
     $('#formCadEstudante input#nomeusuario').val((texto[0]+texto[1]).toLowerCase().replace(/[áàâã]/g,'a').replace(/[éèê]/g,'e').replace(/[îíì]/g,'i').replace(/[óòôõ]/g,'o').replace(/[úùû]/g,'u').replace(/[ç]/g,'c'));
+  }
+});
+
+$(document).on('blur','#formCadAdministrador input#nome-admin',function(){
+  var texto = $('#formCadAdministrador input#nome-admin').val().split(' ');
+  if(texto.length>=2){
+    $('#formCadAdministrador input#nomeusuario-admin').val((texto[0]+texto[1]).toLowerCase().replace(/[áàâã]/g,'a').replace(/[éèê]/g,'e').replace(/[îíì]/g,'i').replace(/[óòôõ]/g,'o').replace(/[úùû]/g,'u').replace(/[ç]/g,'c'));
   }
 });
 
