@@ -71,13 +71,42 @@ main{
   font-size: 1.4em;
 }
 
+#barra-superior{
+  overflow: hidden;
+}
+
 #local{
   margin-left: 3em;
+  display: inline-block;
 }
 
 #local h2{
   font-size: 1.5em;
   display: inline-block;
+}
+
+.top-button{
+  margin: 0.7em 2%;
+  display: inline-block;
+  cursor: pointer;
+  width: 18%;
+}
+
+.top-button img, .top-button button{
+  width: 100%;
+  cursor: pointer;
+}
+
+form.top-button button{
+  background: none;
+  border: none;
+}
+
+#top-buttons{
+  float: right;
+  width: 30%;
+  display: inline-block;
+  padding: 0;
 }
 
 #tableTurmas td,#tableTurmas th{

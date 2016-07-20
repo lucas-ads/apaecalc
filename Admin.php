@@ -42,8 +42,18 @@
       <img src="_imagens/logo_ifms.png" id="logoIfms" alt="Logo IFMS">
   </header>
   <main>
-    <div id="local">
-      <h2>Turmas</h2>
+    <div id='barra-superior'>
+      <div id="local">
+        <h2>Turmas</h2>
+      </div>
+      <div id="top-buttons">
+        <button class="top-button" id="btn-cadastrarEstudante"><img src="_imagens/add-estudante.svg"/></button>
+        <button class="btn-cadastrarTurma top-button"><img src="_imagens/add-turma.svg"/></button>
+        <button class="top-button" id="btn-cadastrarAdministrador"><img src="_imagens/add-administrador.svg"/></button>
+        <form class="top-button" action="deslogarProfessor.php" method="post">
+            <button type="submit"><img src="_imagens/logout.svg" alt="" /></button>
+        </form>
+      </div>
     </div>
     <table id="tableTurmas">
         <thead>
@@ -91,12 +101,6 @@
           ?>
         </tbody>
       </table>
-      <form action="deslogarProfessor.php" method="post">
-          <button type="submit">Sair</button>
-      </form>
-      <button id="btn-cadastrarEstudante">Cadastrar Estudante</button>
-      <button id="btn-cadastrarAdministrador">Cadastrar Admintrador</button>
-      <button class="btn-cadastrarTurma">Cadastrar Turma</button>
   </main>
   <div id="testes">
 
