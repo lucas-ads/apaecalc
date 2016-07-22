@@ -180,7 +180,7 @@ function cadastrarAdministrador(id){
     confirmasenha: $('#confirm-password-admin').val(),
   };
   if(dados.nomeusuario!=""&&dados.nome!=""&&dados.senha!=""&&dados.confirmasenha!=""){
-    cadastrarItem(dados,output,'_include/cadastrarAdministrador.php',function(dadosEnviados,dadosRecebidos){
+    cadastrarItem(dados,output,'_include/CadastrarAdministrador.php',function(dadosEnviados,dadosRecebidos){
       $('#formCadAdministrador').find('#nome-admin,#nomeusuario-admin,#password-admin,#confirm-password-admin').val('');
       $('#formCadAdministrador #nome-admin').focus();
     },null);

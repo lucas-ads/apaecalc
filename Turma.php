@@ -91,7 +91,7 @@
                         </button>
                       </form>
                       <button class="btn-editarestudante btn-actionestudante">
-                        <img src="_imagens/icone-editar.png" alt="Editar"/>
+                        <img src="_imagens/icone-editar.svg" alt="Editar"/>
                       </button>
                       </td>
                     </tr>';

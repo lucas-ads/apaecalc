@@ -78,7 +78,7 @@
                           <span class="icon-cancel"></span>
                         </button>
                         <button class="btn-editarturma btn-actionturma">
-                          <img src="_imagens/icone-editar.png" alt="Editar"/>
+                          <img src="_imagens/icone-editar.svg" alt="Editar"/>
                         </button>
                         <button class="btn-actionturma btn-print">
                           <span class="icon-print"></span>
