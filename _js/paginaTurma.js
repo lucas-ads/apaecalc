@@ -5,7 +5,6 @@ function exibirForm(form, titulo, textobt1, textobt2,funcao1,funcao2,id){
     form.find('input:not([type="radio"])').val('');
     form.find('textarea').val('');
     form.find('output').val('');
-    form.find('input[type="checkbox"]').prop("checked",false);
     form.find('button').off();
     form.find('h1').html(titulo);
     form.find('#bt1').text(textobt1);
@@ -259,6 +258,26 @@ $('#btn-cadastrarEstudante').click(function(){
   exibirForm($('#cadastroEstudante'),'Cadastrar Estudante','Fechar','Cadastrar',null,cadastrarEstudante,0);
 });
 
+$(document).on('click','.btn-print',function(){
+  var id=parseInt($(this).attr('id'));
+
+  exibirForm($('#relatorioTurma'),"Gerar relatório","Cancelar","Imprimir",null,function(){
+      var output=$('#relatorioTurma output');
+      dados={
+        atuais: $('#check-matriculasatuais').prop("checked")==true?1:0,
+        antigas: $('#check-matriculasantigas').prop("checked")==true?1:0
+      };
+      if(dados.atuais==0&&dados.antigas==0){
+        event.preventDefault();
+        output.text('Pelo menos um dos campos com (*) devem estar marcados!');
+      }else{
+        output.text('');
+      }
+  });
+  $('#relatorioTurma #idturma').attr('value',id);
+});
+
+
 $(document).on('click','.btn-editarestudante',function(){
   exibirForm($('#edicaoDadosGerais'),'Atualizar Informações','Cancelar','Salvar',null,editarEstudante,0);
   var id=parseInt($(this).parent().parent().attr('value'));
@@ -344,15 +363,6 @@ $(document).on('click','.check-estudante',function(){
      $('#btn-transferir').addClass('disabled');
      desabilitaSelecao();
    }
-});
-
-$(document).on('scroll', function () {
-  var distanceToTop = $(window).scrollTop();
-  if(distanceToTop>150){
-    $("#btn-transferir").addClass("fixed");
-  }else{
-    $("#btn-transferir").removeClass("fixed");
-  }
 });
 
 $(document).on('blur','#formCadEstudante input#nome',function(){

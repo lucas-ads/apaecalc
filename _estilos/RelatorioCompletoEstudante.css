@@ -202,9 +202,13 @@ span.icon-cancel{
   display: table;
 }
 
-[id*="open-historico-"]:checked ~ h1 label span:before{
+[id*="open-historico-"]:checked ~ h1 label:first-child span:before{
   font-family: entypo;
   content: "\e75c";
+}
+
+li h1 label:last-child{
+  cursor: pointer;
 }
 
 .empty{

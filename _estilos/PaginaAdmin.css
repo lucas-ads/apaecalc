@@ -89,7 +89,7 @@ main{
   margin: 0.7em 2%;
   display: inline-block;
   cursor: pointer;
-  width: 18%;
+  width: 18%; 
 }
 
 .top-button img, .top-button button{
@@ -97,8 +97,9 @@ main{
   cursor: pointer;
 }
 
-form.top-button button{
-  background: none;
+form.deslogar button{
+  background: rgb(220,0,0);
+  border-radius: 15%;
   border: none;
 }
 

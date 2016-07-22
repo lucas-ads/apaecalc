@@ -47,10 +47,23 @@
       <img src="_imagens/logo_ifms.png" id="logoIfms" alt="Logo IFMS">
   </header>
   <main>
-    <div id="local">
-      <a href="Admin.php">Turmas</a><h2><?php echo $nometurma;?></h2>
+    <div id='barra-superior'>
+      <div id="local">
+        <a href="Admin.php">Turmas</a><h2><?php echo $nometurma;?></h2>
+      </div>
+      <div id="top-buttons">
+        <button class="top-button" id="btn-cadastrarEstudante"><img src="_imagens/add-estudante.svg"/></button>
+        <button id="btn-transferir" name="name" class="top-button disabled"><img src="_imagens/transferir-estudantes.svg" alt="" /></button>
+        <button class="top-button btn-print" id="<?php echo $idturma; ?>"><img src="_imagens/gerar-relacao-estudantes.svg" alt="" /></button>
+        <form class="top-button" method="GET" target="_blank" action="RelatorioDeProgressoTurma.php">
+          <input name="idturma" type="hidden" value="<?php echo $idturma; ?>">
+          <button type='submit'><img src="_imagens/relatorio-progresso-turma.svg" alt="" /></button>
+        </form>
+        <form class="top-button deslogar" action="deslogarProfessor.php" method="post">
+            <button type="submit"><img src="_imagens/logout.svg" alt="" /></button>
+        </form>
+      </div>
     </div>
-    <input type="button" id="btn-transferir" name="name" class="disabled" value="Transferir">
     <table id="tableEstudantes">
         <thead>
           <tr>
@@ -89,11 +102,6 @@
           ?>
         </tbody>
       </table>
-      <form action="deslogarProfessor.php" method="post">
-          <button type="submit">Sair</button>
-      </form>
-      <button id="btn-cadastrarEstudante">Cadastrar Estudante</button>
-      <button class="btn-cadastrarTurma">Cadastrar Turma</button>
   </main>
   <div id="testes">
 
@@ -244,6 +252,42 @@
           <button id="bt2">Cadastrar</button>
         </div>
     </div>
+  </div>
+  <div id="relatorioTurma" class="form">
+    <div class="foco">
+        <h1></h1>
+        <form target="_blank" method="GET" action="RelatorioDeTurma.php" id="formRelatorioTurma">
+          <h2>Este relatorio deve conter:</h2>
+          <div class="">
+            <input type="checkbox" name="matriculasatuais" id="check-matriculasatuais" checked>
+            <label for="check-matriculasatuais">*os estudantes atualmente matriculados nesta turma</label>
+          </div>
+          <div class="">
+            <input type="checkbox" name="matriculasantigas" id="check-matriculasantigas">
+            <label for="check-matriculasantigas">*os estudantes que já passaram por esta turma</label>
+          </div>
+          <div class="">
+            <input type="checkbox" name="nomeusuario" id="check-nomeusuario">
+            <label for="check-nomeusuario">os nomes de usuário dos estudantes</label>
+          </div>
+          <div class="">
+            <input type="checkbox" name="datanascimento" id="check-datanascimento" checked>
+            <label for="check-datanascimento">as datas de nascimento dos estudantes</label>
+          </div>
+          <div class="">
+            <input type="checkbox" name="deficiencia" id="check-deficiencia">
+            <label for="check-deficiencia">a deficiência que cada estudante possui</label>
+          </div>
+          <div class="">
+            <input type="checkbox" name="datasmatriculas" id="check-datasmatriculas" checked>
+            <label for="check-datasmatriculas">as datas de entrada e saída da turma atual</label>
+          </div>
+          <input type="hidden" id="idturma" name="idturma">
+          <output> </output>
+          <button type="button" id="bt1">Cancelar</button>
+          <button id="bt2">Cadastrar</button>
+        </div>
+    </form>
   </div>
   <script id="template-linhaestudante" type="text/template">
     <tr value="{{idestudante}}">

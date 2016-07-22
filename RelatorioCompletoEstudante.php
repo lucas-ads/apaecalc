@@ -81,11 +81,13 @@
                               <label for='open-historico-".$i."' class='btn-open-historico'>
                                 <span class='icon-right-open'></span>
                               </label>
-                              <span>".$historico[$i]["nome_turma"]."</span>&nbsp-&nbsp
-                              <span>
-                                <span>Período: ".$historico[$i]["data_entrada"]."</span>
-                                <span>".($historico[$i]["data_saida"]!=NULL?("&nbspà&nbsp".$historico[$i]["data_saida"]):"&nbspAté o momento")."</span>
-                              </span>
+                              <label for='open-historico-".$i."'>
+                                <span>".$historico[$i]["nome_turma"]."</span>&nbsp-&nbsp
+                                <span>
+                                  <span>Período: ".$historico[$i]["data_entrada"]."</span>
+                                  <span>".($historico[$i]["data_saida"]!=NULL?("&nbspà&nbsp".$historico[$i]["data_saida"]):"&nbspAté o momento")."</span>
+                                </span>
+                              </label>
                             </h1>
                             <table>
                               <thead>

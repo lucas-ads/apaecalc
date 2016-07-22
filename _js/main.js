@@ -20,7 +20,7 @@ function getSymbol(){
 
 function getNameCaption(){
     if(operacao_global==1)
-        return "Soma";
+        return "Adição";
     if(operacao_global==2)
         return "Subtração";
     if(operacao_global==3)

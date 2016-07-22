@@ -71,39 +71,53 @@ main{
   font-size: 1.4em;
 }
 
+#barra-superior{
+  overflow: hidden;
+}
+
 #local{
   margin-left: 3em;
   display: inline-block;
 }
 
+#local h2{
+  font-size: 1.5em;
+  display: inline-block;
+}
+
+.top-button{
+  margin: 0.7em 2%;
+  display: inline-block;
+  cursor: pointer;
+  width: 13.5%;
+}
+
+.top-button img, .top-button button{
+  width: 100%;
+  cursor: pointer;
+}
+
+form.deslogar button{
+  background: rgb(220,0,0);
+  border-radius: 15%;
+  border: none;
+}
+
+#top-buttons{
+  float: right;
+  width: 30%;
+  display: inline-block;
+  padding: 0;
+}
+
+
 .check-estudante{
   cursor: pointer;
 }
 
-#btn-transferir{
-  float: right;
-  margin-right: 5%;
-  margin-top: 1em;
-  background: gray;
-  color: white;
-  padding: 0.4em;
-  font-size: 1.1em;
-  letter-spacing: 0.2em;
-  border-radius: 0.4em;
-  cursor: pointer;
-  border: none;
-  outline: none;
-}
-
-#btn-transferir:not(.disabled){
-  background-color: #00A6DE;
-}
-
-#btn-transferir.fixed:not(.disabled){
-  position: fixed;
-  top:17%;
-  right: 17%;
-  font-size: 1.5em;
+#btn-transferir.disabled{
+  pointer-events: none;
+  background-color: #AAA;
 }
 
 #local a,#local h2{
@@ -164,6 +178,15 @@ main{
 }
 
 /*########################## Estilização dos formulários ###########################*/
+
+#relatorioTurma h2{
+  font-size: 1.3em;
+}
+
+#formRelatorioTurma > div{
+  margin-bottom: 1em;
+  text-align: left;
+}
 
 .form{
     position: fixed;
@@ -273,7 +296,8 @@ div[id*="formCad"] select#select-turmas,div#transferenciaEstudantes select#selec
 }
 
 #estudantesSelecionados > h2{
-  font-size: 1em;
+  font-size: 1.2em;
+  color: blue;
 }
 
 #estudantesSelecionados > label{
@@ -336,9 +360,5 @@ div[id*="formCad"] select#select-turmas,div#transferenciaEstudantes select#selec
 @media only screen and (min-width: 1275px){
     header#cabecalho h1{
         margin: 0.4em auto;
-    }
-
-    #btn-transferir{
-      margin-right: 15%;
     }
 }

@@ -92,7 +92,7 @@
                     <span id="caption" value="1"></span>:
                     <span id="stage" value="1"></span>
                 </h1>
-                <button id="btResetar" class="icon-cw foco"></button>
+                <button id="btResetar" class="foco"><img src="_imagens/reiniciar-partida.svg"/></button>
             </div>
             <div id="container" class="foco">
                 <div>

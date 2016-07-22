@@ -77,17 +77,16 @@
               $partida=getPartidaById($idpartida);
               if($estudante!=null&&$perguntas!=null){
                 echo "<section id='info-estudante'><table>";
-                echo "<tr><td rowspan='3' id='nome-estudante'>".$estudante->get_nome()."</td>";
-                echo "<td class='col2'>Nome de Usuário: ".$estudante->get_nomeusuario()."</td>";
-                echo "<td class='col3 deficiencia' rowspan='2'>Deficiência: ".$estudante->get_nomedeficiencia()."</td></tr>";
-                echo "<tr><td class='col2'>Data de Nascimento: ".$estudante->get_datanascimento()."</td></tr>";
+                echo "<tr><td id='nome-estudante'>".$estudante->get_nome()."</td>";
+                echo "<td>Fase: ".getNomeOperacao($partida['operacao'])."/".$partida['etapa']."</td>";
+                echo "<td>Data: ".$partida["data_partida"]."</td></tr>";
                 $turma=carregaTurma($estudante->get_turmaatual());
-                echo "<tr><td class='col2'>Turma Atual: ".$turma["nome_turma"]."</td><td class='col3'>Modo de Jogo: ".($estudante->get_embaralhar()==1?"Embaralhado":"Normal")."</td></tr>";
-                $obs=$estudante->get_observacao();
-                if($obs!=""){
-                  echo "<tr><td class='observacao' colspan='3'>Observação: ".$obs."</td></tr>";
-                }
+                echo "<tr><td>Turma Atual: ".$turma["nome_turma"]."</td>";
+                echo "<td>Modalidade: ".($partida["carreira"]==1?"Carreira":"Livre")."</td>";
+                echo "<td>Embaralhado: ".($estudante->get_embaralhar()==1?"Sim":"Não")."</td></tr>";
                 echo "</table></section>";
+
+
                 echo "<table id='tablerespostas'>
                 <thead>
                   <tr>
@@ -118,21 +117,30 @@
                       $count+=1;
                     }
                     $resposta="--";
-                    $data="--";
+                    $tempo="--";
                     $correcao="--";
                     $classcorrecao="";
                     if($perguntas[$i]["valor_resposta"]!=null){
                       $resposta=$perguntas[$i]["valor_resposta"];
-                      $data=gmdate("i:s",$perguntas[$i]["tempo_gasto"])." min";
+                      $tempo=gmdate("i:s",$perguntas[$i]["tempo_gasto"])." min";
                       $correcao="";
                       $classcorrecao=($perguntas[$i]["correta"]==0?"icon-cancel":"icon-check");
                     }
                     $line.= "<td>".$resposta."</td>
-                            <td>".$data."</td>
+                            <td>".$tempo."</td>
                             <td><span class='".$classcorrecao."'>".$correcao."</span</td>";
                     $line.= "</tr>";
                   }
                   $line=str_replace("{{here}}",$count,$line);
+                  $tempo="--";
+                  $correcao="--";
+                  $classcorrecao="";
+                  if($partida["vencida"]!=null){
+                    $tempo=gmdate("i:s",$partida["tempototal"])." min";
+                    $correcao="";
+                    $classcorrecao=($partida["vencida"]==0?"icon-cancel":"icon-check");
+                  }
+                  $line.="<tr class='resultado correcao-".$classcorrecao."'><td colspan='2'>Resultado:</td><td>".$tempo."</td><td><span class='".$classcorrecao."'>".$correcao."</span</td><tr>";
                   echo $line;
                 echo "</tbody></table>";
                 date_default_timezone_set('America/Sao_Paulo');

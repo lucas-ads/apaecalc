@@ -69,34 +69,26 @@ section table{
   width: 80%;
   min-width: 820px;
   border-collapse: collapse;
+  border-bottom: solid 2px black;
 }
 
 section table td{
   padding: 0.3em;
-  font-size: 1.5em;
+  font-size: 1.6em;
 }
 
-.deficiencia{
+section table tr td:not(:first-child){
+  border-left: solid 2px black;
+}
+
+section table tr:first-child td{
+  font-size: 2em;
   vertical-align: top;
 }
 
 #nome-estudante{
-  font-size: 2.6em;
-  max-width: 300px;
-}
-
-.col2{
-  white-space: nowrap;
-  border-right: solid 2px black;
-  border-left: solid 2px black;
-}
-
-.col3{
-  width: 35%;
-}
-
-.observacao{
-  border-top: solid 2px black;
+  font-size: 2em;
+  max-width: 200px;
 }
 
 #tablerespostas{
@@ -110,7 +102,7 @@ section table td{
   padding: 0.5em 0.8em;
 }
 
-#tablerespostas thead{
+#tablerespostas thead,.resultado{
   background-color: rgb(225,239,187);
   font-size: 1.2em;
 }
@@ -129,6 +121,14 @@ section table td{
 
 #tablerespostas td{
   text-align: center;
+}
+
+.correcao-icon-check{
+  background-color: rgb(193, 200, 255);
+}
+
+.correcao-icon-cancel{
+  background-color: rgb(255, 200, 193);
 }
 
 span.icon-check{
