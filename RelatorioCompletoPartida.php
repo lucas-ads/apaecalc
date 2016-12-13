@@ -82,7 +82,7 @@
                 echo "<td>Data: ".$partida["data_partida"]."</td></tr>";
                 $turma=carregaTurma($estudante->get_turmaatual());
                 echo "<tr><td>Turma Atual: ".$turma["nome_turma"]."</td>";
-                echo "<td>Modalidade: ".($partida["carreira"]==1?"Carreira":"Livre")."</td>";
+                echo "<td>Modalidade: ".($partida["carreira"]==1?"Sequencial":"Livre")."</td>";
                 echo "<td>Embaralhado: ".($estudante->get_embaralhar()==1?"Sim":"Não")."</td></tr>";
                 echo "</table></section>";
 

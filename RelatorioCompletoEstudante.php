@@ -127,7 +127,7 @@
                                 $line.="<tr class='partida'>
                                     <td>".getNomeOperacao($partidas[$j]["operacao"])."</td>
                                     <td>".$partidas[$j]["etapa"]."</td>
-                                    <td>".($partidas[$j]["carreira"]==1?"Carreira":"Livre")."</td>
+                                    <td>".($partidas[$j]["carreira"]==1?"Sequencial":"Livre")."</td>
                                     <td>".($partidas[$j]["embaralhado"]?"Sim":"Não")."</td>
                                     <td>".$tempo."</td>
                                     <td><span class=".$icon.">".$conteudo."</span></td>

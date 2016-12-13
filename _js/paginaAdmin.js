@@ -242,7 +242,7 @@ $(document).on('click','.btn-excluirturma',function(){
 $(document).on('click','.btn-print',function(){
   var id=parseInt($(this).parent().parent().attr('value'));
 
-  exibirForm($('#relatorioTurma'),"Gerar relatório","Cancelar","Imprimir",null,function(){
+  exibirForm($('#relatorioTurma'),"Gerar relatório","Cancelar","Gerar",null,function(){
       var output=$('#relatorioTurma output');
       dados={
         atuais: $('#check-matriculasatuais').prop("checked")==true?1:0,

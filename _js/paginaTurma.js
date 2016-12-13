@@ -261,7 +261,7 @@ $('#btn-cadastrarEstudante').click(function(){
 $(document).on('click','.btn-print',function(){
   var id=parseInt($(this).attr('id'));
 
-  exibirForm($('#relatorioTurma'),"Gerar relatório","Cancelar","Imprimir",null,function(){
+  exibirForm($('#relatorioTurma'),"Gerar relatório","Cancelar","Gerar",null,function(){
       var output=$('#relatorioTurma output');
       dados={
         atuais: $('#check-matriculasatuais').prop("checked")==true?1:0,

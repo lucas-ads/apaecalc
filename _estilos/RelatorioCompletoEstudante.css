@@ -60,6 +60,10 @@ header#cabecalho h1{
 
 /*############################ 1 - Corpo da página ############################*/
 
+body{
+  -webkit-print-color-adjust: exact;
+}
+
 section{
   margin: 1em 0;
 }

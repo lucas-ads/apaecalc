@@ -8,6 +8,7 @@
 body{
     font-size: 10px;
     margin: 0;
+    -webkit-print-color-adjust: exact;
 }
 
 body *{
